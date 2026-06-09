@@ -1,270 +1,624 @@
-# 🛒 E-commerce - Atividade 3
+# 🏗️ E-commerce - Atividade 7
 
 ## 📖 Sobre esta Atualização
 
-Esta branch contém a terceira etapa de evolução do projeto de e-commerce.
+Esta branch representa a sétima evolução do projeto de e-commerce.
 
-O foco desta atividade foi melhorar a interface da aplicação utilizando **PrimeVue** e **Tailwind CSS**, tornando a experiência visual mais organizada, responsiva e moderna.
+Após a criação da API REST utilizando Express e TypeScript, esta etapa teve como foco a evolução da arquitetura da aplicação através da separação de responsabilidades em camadas, implementação de Controllers e validação robusta de dados utilizando **Zod**.
 
-Nesta etapa, a lógica do e-commerce foi mantida, incluindo o funcionamento do carrinho, a tipagem com TypeScript e a estrutura dos produtos. A principal evolução foi a refatoração da interface, substituindo elementos HTML comuns por componentes visuais mais robustos e estilizados.
+O principal objetivo foi tornar a API mais organizada, escalável e segura, impedindo que dados inválidos sejam processados pelo sistema.
 
 ---
 
 ## 🎯 Objetivos da Atividade
 
-Implementar melhorias na interface do sistema utilizando:
+Implementar:
 
-- PrimeVue
-- Tailwind CSS
-- Componentes reutilizáveis
-- Layout responsivo
-- Componentes visuais para produtos e carrinho
-- Manutenção da reatividade da aplicação
-- Preservação da tipagem com TypeScript
-
----
-
-## 🚀 Funcionalidades e Melhorias Implementadas
-
-### 🧩 Integração com PrimeVue
-
-O projeto foi configurado para utilizar componentes do **PrimeVue**, permitindo uma interface mais profissional e padronizada.
-
-Componentes utilizados na aplicação:
-
-- `Card`
-- `Button`
-- `InputNumber`
-
-Esses componentes substituem elementos HTML comuns e tornam a interface mais elegante e consistente.
+- Arquitetura baseada em camadas
+- Controllers para tratamento das requisições
+- Schemas de validação com Zod
+- Validação de parâmetros
+- Validação de Query Strings
+- Validação de Body
+- Fluxo completo de Categorias
+- Fluxo completo de Produtos
+- Middleware reutilizável de validação
 
 ---
 
-### 🎨 Estilização com Tailwind CSS
+# 🏛️ Arquitetura da Aplicação
 
-A estilização foi realizada utilizando classes utilitárias do **Tailwind CSS**, evitando CSS customizado manual.
+Nesta etapa a API foi reorganizada para seguir uma estrutura mais próxima de aplicações profissionais.
 
-Foram aplicadas classes para:
-
-- Espaçamento
-- Grid responsivo
-- Alinhamento
-- Bordas
-- Sombras
-- Organização visual
-- Responsividade
-
-Exemplo de layout responsivo utilizado:
-
-```html
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+```text
+Cliente
+   │
+   ▼
+Router
+   │
+   ▼
+Middleware de Validação
+   │
+   ▼
+Controller
+   │
+   ▼
+Resposta HTTP
 ```
 
----
-
-### 🖼️ Refatoração do ProductCard.vue
-
-O componente `ProductCard.vue` foi refatorado para utilizar componentes do PrimeVue.
-
-Principais melhorias:
-
-- Uso do componente `Card`
-- Uso do componente `Button`
-- Melhor organização visual do produto
-- Layout mais limpo e reutilizável
-- Estilização com Tailwind CSS
-
-Essa alteração deixou a vitrine de produtos mais organizada e visualmente próxima de uma aplicação real de e-commerce.
+Cada camada possui uma responsabilidade específica.
 
 ---
 
-### 🏗️ Atualização do Layout Principal
-
-O arquivo `App.vue` foi ajustado para organizar melhor a vitrine de produtos e a área do carrinho.
-
-Melhorias aplicadas:
-
-- Grid responsivo para produtos
-- Separação visual entre vitrine e carrinho
-- Layout adaptável para diferentes tamanhos de tela
-- Melhor espaçamento entre os elementos
-
----
-
-### 🛒 Carrinho com Componentes PrimeVue
-
-A área do carrinho foi melhorada com componentes visuais do PrimeVue.
-
-Melhorias implementadas:
-
-- Exibição dos itens adicionados ao carrinho
-- Visualização da quantidade de cada item
-- Atualização de quantidade com `InputNumber`
-- Cálculo automático do total de itens
-- Cálculo automático do preço final
-
----
-
-### 🔢 Controle de Quantidade
-
-O componente `InputNumber` foi utilizado para alterar a quantidade de produtos no carrinho de forma mais prática.
-
-Com isso, o usuário pode incrementar ou reduzir a quantidade dos itens de maneira mais intuitiva, mantendo a reatividade da aplicação.
-
----
-
-### 🧮 Total de Itens e Preço Final
-
-A aplicação continua exibindo:
-
-- Total de itens no carrinho
-- Preço final da compra
-
-Esses valores são atualizados de forma reativa conforme os produtos são adicionados ou suas quantidades são alteradas.
-
----
-
-## 🔥 Desafio Extra
-
-Além da migração básica para PrimeVue e Tailwind, a atividade também propôs melhorias de experiência premium.
-
-Possíveis melhorias previstas:
-
-- Empty State para carrinho vazio
-- Confirmação antes de remover todos os itens
-- Implementação de tema claro/escuro
-- Uso de `ConfirmDialog`
-- Integração com classes `dark:` do Tailwind
-
----
-
-## 🏗️ Estrutura da Aplicação
-
-A aplicação segue uma estrutura baseada em componentes, mantendo a separação entre lógica, visualização e tipagem.
+## 📂 Organização do Projeto
 
 ```text
 src/
-├── components/
-│   └── ProductCard.vue
+├── routers/
+│   ├── category.router.ts
+│   └── product.router.ts
 │
-├── models/
-│   ├── Category.ts
-│   ├── Product.ts
-│   ├── User.ts
-│   └── Cart.ts
-│   └── CartItem.ts
+├── controllers/
+│   ├── category.controller.ts
+│   └── product.controller.ts
 │
+├── schemas/
+│   ├── category.schema.ts
+│   └── product.schema.ts
 │
-├── App.vue
-├── main.ts
-└── style.css
+├── middlewares/
+│   └── validateData.ts
+│
+├── app.ts
+└── server.ts
 ```
 
 ---
 
-## 📚 Conceitos Praticados
+# 📂 Fluxo de Categorias
 
-### Vue
+## 📋 Listagem de Categorias
 
-- Componentização
-- Props
-- Eventos personalizados
-- Reatividade
-- Options API
+### Endpoint
 
-### TypeScript
+```http
+GET /category
+```
 
-- Interfaces
-- Tipagem de objetos
-- Tipagem de componentes
-- Proteção de dados com tipos
-
-### PrimeVue
-
-- Configuração de plugin
-- Uso de componentes prontos
-- Componentes `Card`
-- Componentes `Button`
-- Componentes `InputNumber`
-
-### Tailwind CSS
-
-- Classes utilitárias
-- Grid responsivo
-- Espaçamentos
-- Sombras
-- Bordas arredondadas
-- Layout adaptável
-
-### E-commerce
-
-- Vitrine de produtos
-- Carrinho de compras
-- Controle de quantidade
-- Cálculo de totais
-- Atualização reativa da interface
+Permite listar categorias com suporte à paginação.
 
 ---
 
-## 🔄 Evolução em Relação à Atividade 2
+### Paginação Segura
 
-Na Atividade 2, o foco estava na estrutura lógica do sistema, incluindo:
+Os parâmetros enviados pela Query String são validados utilizando:
 
-- Models
-- Interfaces
-- Tipagem avançada
-- Carrinho
-- Regras de negócio
-- High-Order Functions
+```typescript
+categoryQueryPaginationSchema
+```
 
-Nesta Atividade 3, o projeto evoluiu visualmente com:
+Exemplo:
 
-- Integração do PrimeVue
-- Configuração do Tailwind CSS
-- Refatoração do `ProductCard.vue`
-- Melhoria do layout principal
-- Grid responsivo para produtos
-- Carrinho com componentes mais modernos
-- Melhor experiência de uso
+```http
+GET /category?page=1&size=10
+```
 
----
+Parâmetros validados:
 
-## ✅ Critérios Atendidos
+```typescript
+page
+size
+```
 
-- Uso de PrimeVue na interface
-- Uso de pelo menos dois componentes PrimeVue
-- Estilização com Tailwind CSS
-- Layout responsivo
-- Lógica de carrinho preservada
-- Tipagem TypeScript mantida
-- Reatividade da aplicação mantida
-- Interface mais organizada e profissional
+Garantindo que sejam números válidos.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🔍 Consulta por ID
+
+### Endpoint
+
+```http
+GET /category/:id
+```
+
+Permite buscar uma categoria específica.
+
+---
+
+### Validação de UUID
+
+O parâmetro recebido na URL é validado através de:
+
+```typescript
+categoryParamsSchema
+```
+
+Exemplo:
+
+```http
+GET /category/123
+```
+
+Resposta:
+
+```http
+400 Bad Request
+```
+
+Caso o valor não seja um UUID válido.
+
+---
+
+## ➕ Criação de Categoria
+
+### Endpoint
+
+```http
+POST /category
+```
+
+Permite cadastrar uma nova categoria.
+
+---
+
+### Validação com Zod
+
+Utilizando:
+
+```typescript
+createCategorySchema
+```
+
+Regra:
+
+```typescript
+name
+```
+
+Deve possuir no mínimo:
+
+```text
+3 caracteres
+```
+
+---
+
+### Exemplo Inválido
+
+```json
+{
+  "name": "TV"
+}
+```
+
+Resposta:
+
+```http
+400 Bad Request
+```
+
+Retornando o erro gerado pelo Zod.
+
+---
+
+## ✏️ Atualização de Categoria
+
+### Endpoint
+
+```http
+PUT /category/:id
+```
+
+Permite atualizar uma categoria existente.
+
+---
+
+### Validações Aplicadas
+
+- UUID válido
+- Dados válidos no Body
+- Estrutura compatível com o Schema
+
+---
+
+## ❌ Remoção de Categoria
+
+### Endpoint
+
+```http
+DELETE /category/:id
+```
+
+Permite remover uma categoria.
+
+---
+
+### Validação
+
+O ID recebido é validado antes da execução da operação.
+
+---
+
+# 📦 Fluxo de Produtos
+
+## 🏗️ Product Schema
+
+Foi criado o arquivo:
+
+```typescript
+product.schema.ts
+```
+
+Responsável pela validação dos produtos.
+
+---
+
+### Campos Obrigatórios
+
+```typescript
+name
+price
+categoryId
+```
+
+---
+
+### Regras de Validação
+
+#### Nome
+
+```typescript
+string
+```
+
+Mínimo:
+
+```text
+3 caracteres
+```
+
+---
+
+#### Preço
+
+```typescript
+number
+```
+
+Deve ser:
+
+```text
+Maior que zero
+```
+
+---
+
+#### Categoria
+
+```typescript
+categoryId
+```
+
+Deve ser:
+
+```text
+UUID válido
+```
+
+---
+
+## ➕ Criação de Produto
+
+### Endpoint
+
+```http
+POST /products
+```
+
+Responsável por cadastrar novos produtos.
+
+---
+
+### Processo
+
+O Controller recebe:
+
+```typescript
+req.body
+```
+
+E realiza a validação através de:
+
+```typescript
+safeParse()
+```
+
+---
+
+### Resposta de Sucesso
+
+```http
+201 Created
+```
+
+---
+
+### Exemplo
+
+```json
+{
+  "name": "Notebook Gamer",
+  "price": 5500,
+  "categoryId": "uuid"
+}
+```
+
+---
+
+## 📋 Listagem de Produtos
+
+### Endpoint
+
+```http
+GET /products
+```
+
+Retorna todos os produtos cadastrados.
+
+---
+
+### Filtro por Categoria
+
+Suporta Query String:
+
+```http
+GET /products?category=id_da_categoria
+```
+
+Permite filtrar produtos por categoria.
+
+---
+
+### Query Utilizada
+
+```typescript
+req.query.category
+```
+
+---
+
+## ❌ Exclusão de Produto
+
+### Endpoint
+
+```http
+DELETE /products/:id
+```
+
+Responsável pela remoção de produtos.
+
+---
+
+### Validação
+
+Antes da exclusão:
+
+```typescript
+productParamsSchema
+```
+
+valida o UUID recebido.
+
+---
+
+### Resposta
+
+```http
+204 No Content
+```
+
+---
+
+# 🔥 Middleware de Validação
+
+Uma das principais melhorias desta atividade foi a criação de um middleware genérico para validação.
+
+Arquivo:
+
+```typescript
+validateData.ts
+```
+
+---
+
+## Funcionamento
+
+O middleware recebe um schema do Zod:
+
+```typescript
+validateData(schema)
+```
+
+E executa automaticamente:
+
+```typescript
+schema.safeParse()
+```
+
+---
+
+## Benefícios
+
+- Reutilização de código
+- Controllers mais limpos
+- Menos repetição
+- Melhor manutenção
+- Maior escalabilidade
+
+---
+
+## Fluxo
+
+```text
+Request
+   │
+   ▼
+Middleware
+   │
+   ├── Dados válidos
+   │        │
+   │        ▼
+   │   Controller
+   │
+   └── Dados inválidos
+            │
+            ▼
+      400 Bad Request
+```
+
+---
+
+# 🛡️ Validação com Zod
+
+Foi utilizado o Zod para validar:
+
+### Query Strings
+
+```typescript
+req.query
+```
+
+---
+
+### Params
+
+```typescript
+req.params
+```
+
+---
+
+### Body
+
+```typescript
+req.body
+```
+
+---
+
+### Benefícios
+
+- Segurança
+- Tipagem automática
+- Mensagens de erro claras
+- Menos validações manuais
+
+---
+
+# 📚 Conceitos Praticados
+
+## Express
+
+- Routers
+- Controllers
+- Middlewares
+
+---
+
+## TypeScript
+
+- Request
+- Response
+- NextFunction
+- Tipagem de Schemas
+
+---
+
+## Zod
+
+- safeParse()
+- UUID Validation
+- Body Validation
+- Query Validation
+- Params Validation
+
+---
+
+## REST API
+
+- GET
+- POST
+- PUT
+- DELETE
+
+---
+
+## Arquitetura
+
+- Separação de responsabilidades
+- Controllers
+- Schemas
+- Middlewares
+- Organização por camadas
+
+---
+
+# 🔄 Evolução em Relação à Atividade 6
+
+Na Atividade 6 o foco estava na criação das primeiras rotas REST utilizando Express.
+
+Nesta Atividade 7 a aplicação evoluiu através da implementação de:
+
+- Controllers
+- Schemas de validação
+- Zod
+- Middleware genérico
+- Validação de UUID
+- Paginação validada
+- Estrutura modular
+- Arquitetura mais escalável
+
+A API deixou de possuir apenas rotas simples e passou a seguir um padrão arquitetural mais próximo de aplicações corporativas.
+
+---
+
+# ✅ Critérios Atendidos
+
+- Separação entre Routers, Controllers e Schemas
+- Validação com Zod
+- Validação de UUID
+- Validação de Query Strings
+- Validação de Body
+- Middleware reutilizável
+- Uso correto de GET, POST, PUT e DELETE
+- Uso correto dos Status Codes
+- Controllers limpos
+- API mais segura e organizada
+
+---
+
+# 🛠️ Tecnologias Utilizadas
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=vue,ts,js,tailwind,vite,git,github,vscode" />
+<img src="https://skillicons.dev/icons?i=nodejs,express,ts,git,github,vscode" />
 
 </div>
 
 ### Ferramentas
 
-- Vue
+- Node.js
+- Express
 - TypeScript
-- PrimeVue
-- Tailwind CSS
-- Vite
-- JavaScript
+- Zod
 - Git
 - GitHub
 - VS Code
 
 ---
 
-## 👨‍💻 Autor
+# 👨‍💻 Autor
 
 <div align="center">
 
