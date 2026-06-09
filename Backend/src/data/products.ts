@@ -1,27 +1,22 @@
-export interface Product {
-  id: number;
-  name: string;
-  price: number;
-  category: string;
-}
-
-export const products: Product[] = [
+export const products = [
   {
-    id: 1,
+    id: "660e8400-e29b-41d4-a716-446655440000",
     name: "Notebook",
     price: 3500,
-    category: "eletronicos",
+    categoryId: "550e8400-e29b-41d4-a716-446655440000",
   },
+
   {
-    id: 2,
+    id: "660e8400-e29b-41d4-a716-446655440001",
     name: "Mouse Gamer",
     price: 150,
-    category: "eletronicos",
+    categoryId: "550e8400-e29b-41d4-a716-446655440001",
   },
+
   {
-    id: 3,
-    name: "Camiseta",
-    price: 80,
-    category: "vestuario",
+    id: "660e8400-e29b-41d4-a716-446655440002",
+    name: "PlayStation 5",
+    price: 4500,
+    categoryId: "550e8400-e29b-41d4-a716-446655440002",
   },
 ];
