@@ -1,24 +1,37 @@
 <template>
-  <div>
-    <h3>{{ product.name }}</h3>
+  <Card class="shadow-lg">
+    <template #title>
+      {{ product.name }}
+    </template>
 
-    <p>
-      Categoria:
-      {{ product.category.title }}
-    </p>
+    <template #content>
+      <p>
+        Categoria:
+        {{ product.category.title }}
+      </p>
 
-    <p>Preço: R$ {{ product.price.toFixed(2) }}</p>
+      <p class="font-bold">R$ {{ product.price.toFixed(2) }}</p>
 
-    <button @click="$emit('add-product', product)">Adicionar</button>
-  </div>
+      <Button label="Adicionar" icon="pi pi-shopping-cart" @click="$emit('add-product', product)" />
+    </template>
+  </Card>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+
+import Card from "primevue/card";
+import Button from "primevue/button";
+
 import type { Product } from "../models/Product";
 
 export default defineComponent({
   name: "ProductCard",
+
+  components: {
+    Card,
+    Button,
+  },
 
   props: {
     product: {

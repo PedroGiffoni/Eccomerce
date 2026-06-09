@@ -1,38 +1,69 @@
 <template>
-  <h1>E-commerce Vue</h1>
+  <div class="p-6">
+    <h1 class="text-3xl font-bold mb-6">E-commerce Vue</h1>
 
-  <h2>Produtos</h2>
+    <h2 class="text-2xl mb-4">Produtos</h2>
 
-  <ProductCard
-    v-for="product in products"
-    :key="product.id"
-    :product="product"
-    @add-product="addToCart"
-  />
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <ProductCard
+        v-for="product in products"
+        :key="product.id"
+        :product="product"
+        @add-product="addToCart"
+      />
+    </div>
 
-  <hr />
+    <div class="mt-10 border-t pt-6">
+      <h2 class="text-2xl mb-4">Carrinho</h2>
 
-  <h2>Carrinho</h2>
+      <p>
+        Total de itens:
+        <strong>{{ totalItems }}</strong>
+      </p>
 
-  <p>
-    Total de itens:
-    {{ totalItems }}
-  </p>
+      <p>
+        Preço Final:
+        <strong> R$ {{ finalPrice.toFixed(2) }} </strong>
+      </p>
 
-  <p>Preço Final: R$ {{ finalPrice.toFixed(2) }}</p>
+      <h3 class="mt-4 text-xl">Itens</h3>
 
-  <h3>Itens no Carrinho</h3>
+      <div v-if="cartItems.length === 0">
+        <Card>
+          <template #content> Seu carrinho está vazio 🛒 </template>
+        </Card>
+      </div>
 
-  <ul>
-    <li v-for="item in cartItems" :key="item.product.id">
-      {{ item.product.name }}
-      x
-      {{ item.quantity }}
-    </li>
-  </ul>
+      <ul v-else class="list-disc pl-6">
+        <li v-for="item in cartItems" :key="item.product.id" class="mb-2">
+          {{ item.product.name }}
+          x
+          {{ item.quantity }}
+
+          <Button
+            icon="pi pi-minus"
+            severity="warn"
+            size="small"
+            class="ml-2"
+            @click="removeFromCart(item.product)"
+          />
+
+          <Button
+            icon="pi pi-trash"
+            severity="danger"
+            size="small"
+            class="ml-2"
+            @click="removeItem(item.product)"
+          />
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
+import Card from "primevue/card";
+import Button from "primevue/button";
 import { defineComponent } from "vue";
 
 import ProductCard from "./components/ProductCard.vue";
@@ -45,6 +76,8 @@ export default defineComponent({
 
   components: {
     ProductCard,
+    Card,
+    Button,
   },
 
   data() {
@@ -82,7 +115,6 @@ export default defineComponent({
 
     return {
       products,
-
       cartItems: [] as CartItem[],
     };
   },
@@ -99,6 +131,21 @@ export default defineComponent({
           quantity: 1,
         });
       }
+    },
+    removeFromCart(product: Product) {
+      const item = this.cartItems.find((item) => item.product.id === product.id);
+
+      if (!item) return;
+
+      item.quantity--;
+
+      if (item.quantity <= 0) {
+        this.cartItems = this.cartItems.filter((cartItem) => cartItem.product.id !== product.id);
+      }
+    },
+
+    removeItem(product: Product) {
+      this.cartItems = this.cartItems.filter((item) => item.product.id !== product.id);
     },
   },
 
