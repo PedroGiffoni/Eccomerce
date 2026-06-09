@@ -1,3 +1,3 @@
 <template>
-  <RouterView />
+  <h1>Checkout</h1>
 </template>
