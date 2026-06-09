@@ -1,244 +1,372 @@
-# 🛒 E-commerce - Atividade 3
+# 🛒 E-commerce - Atividade 4
 
 ## 📖 Sobre esta Atualização
 
-Esta branch contém a terceira etapa de evolução do projeto de e-commerce.
+Esta branch representa a quarta evolução do projeto de e-commerce.
 
-O foco desta atividade foi melhorar a interface da aplicação utilizando **PrimeVue** e **Tailwind CSS**, tornando a experiência visual mais organizada, responsiva e moderna.
+O foco desta atividade foi implementar uma arquitetura baseada em rotas, criar diferentes layouts para consumidores e administradores e adicionar mecanismos de proteção de acesso utilizando Route Guards.
 
-Nesta etapa, a lógica do e-commerce foi mantida, incluindo o funcionamento do carrinho, a tipagem com TypeScript e a estrutura dos produtos. A principal evolução foi a refatoração da interface, substituindo elementos HTML comuns por componentes visuais mais robustos e estilizados.
+Além disso, a navegação foi integrada ao ecossistema Vue Router, proporcionando uma experiência mais próxima de aplicações profissionais de mercado.
 
 ---
 
 ## 🎯 Objetivos da Atividade
 
-Implementar melhorias na interface do sistema utilizando:
+Implementar:
 
-- PrimeVue
-- Tailwind CSS
-- Componentes reutilizáveis
-- Layout responsivo
-- Componentes visuais para produtos e carrinho
-- Manutenção da reatividade da aplicação
-- Preservação da tipagem com TypeScript
-
----
-
-## 🚀 Funcionalidades e Melhorias Implementadas
-
-### 🧩 Integração com PrimeVue
-
-O projeto foi configurado para utilizar componentes do **PrimeVue**, permitindo uma interface mais profissional e padronizada.
-
-Componentes utilizados na aplicação:
-
-- `Card`
-- `Button`
-- `InputNumber`
-
-Esses componentes substituem elementos HTML comuns e tornam a interface mais elegante e consistente.
+- Navegação entre múltiplas páginas
+- Rotas dinâmicas
+- Layouts distintos para consumidores e administradores
+- Proteção de rotas
+- Controle de permissões por perfil de usuário
+- Integração entre Vue Router, PrimeVue e Tailwind CSS
 
 ---
 
-### 🎨 Estilização com Tailwind CSS
+## 🚀 Funcionalidades Implementadas
 
-A estilização foi realizada utilizando classes utilitárias do **Tailwind CSS**, evitando CSS customizado manual.
+### 🏠 Página Inicial (Home)
 
-Foram aplicadas classes para:
+A Home continua sendo a vitrine principal do sistema.
 
-- Espaçamento
-- Grid responsivo
-- Alinhamento
-- Bordas
-- Sombras
-- Organização visual
-- Responsividade
+Responsabilidades:
 
-Exemplo de layout responsivo utilizado:
+- Exibir produtos cadastrados
+- Permitir acesso aos detalhes dos produtos
+- Permitir adição ao carrinho
+- Servir como ponto inicial da navegação
 
-```html
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+---
+
+### 📦 Página de Detalhes do Produto
+
+Foi implementada uma rota dinâmica para exibição dos detalhes de um produto específico.
+
+Exemplo:
+
+```text
+/product/1
+/product/2
+/product/3
+```
+
+A rota recebe o ID do produto e carrega suas informações individualmente.
+
+---
+
+### 🛒 Página de Checkout
+
+Foi criada uma rota dedicada ao processo de finalização da compra.
+
+Responsabilidades:
+
+- Exibir os itens selecionados
+- Exibir totais
+- Permitir revisão da compra
+
+---
+
+### 🔗 Navegação com Vue Router
+
+A navegação foi migrada para o Vue Router.
+
+Foram utilizados:
+
+```vue
+<router-link>
+```
+
+e componentes de navegação do PrimeVue para permitir transições entre páginas sem recarregamento da aplicação.
+
+Benefícios:
+
+- Melhor experiência de usuário
+- Navegação fluida
+- SPA (Single Page Application)
+
+---
+
+## 🏗️ Layout do Consumidor
+
+Foi criado um layout dedicado aos usuários finais.
+
+Características:
+
+- Header persistente
+- Navegação entre páginas
+- Carrinho sempre acessível
+- Layout focado na experiência de compra
+
+Estrutura:
+
+```text
+ConsumerLayout
+│
+├── Home
+├── Product Details
+└── Checkout
 ```
 
 ---
 
-### 🖼️ Refatoração do ProductCard.vue
+## 👨‍💼 Layout Administrativo
 
-O componente `ProductCard.vue` foi refatorado para utilizar componentes do PrimeVue.
+Foi criada uma área administrativa independente da área de compras.
 
-Principais melhorias:
+Características:
 
-- Uso do componente `Card`
-- Uso do componente `Button`
-- Melhor organização visual do produto
-- Layout mais limpo e reutilizável
-- Estilização com Tailwind CSS
+- Estrutura de Dashboard
+- Menu de navegação próprio
+- Visual separado da área do consumidor
+- Preparação para gerenciamento de produtos
 
-Essa alteração deixou a vitrine de produtos mais organizada e visualmente próxima de uma aplicação real de e-commerce.
+Estrutura:
 
----
-
-### 🏗️ Atualização do Layout Principal
-
-O arquivo `App.vue` foi ajustado para organizar melhor a vitrine de produtos e a área do carrinho.
-
-Melhorias aplicadas:
-
-- Grid responsivo para produtos
-- Separação visual entre vitrine e carrinho
-- Layout adaptável para diferentes tamanhos de tela
-- Melhor espaçamento entre os elementos
+```text
+AdminLayout
+│
+├── Dashboard
+├── Produtos
+└── Relatórios
+```
 
 ---
 
-### 🛒 Carrinho com Componentes PrimeVue
+## 🔐 Proteção de Rotas
 
-A área do carrinho foi melhorada com componentes visuais do PrimeVue.
+Foram implementados Route Guards utilizando:
 
-Melhorias implementadas:
+```typescript
+beforeEach()
+```
 
-- Exibição dos itens adicionados ao carrinho
-- Visualização da quantidade de cada item
-- Atualização de quantidade com `InputNumber`
-- Cálculo automático do total de itens
-- Cálculo automático do preço final
+Esses Guards validam as permissões antes da navegação.
 
 ---
 
-### 🔢 Controle de Quantidade
+### 🛡️ Guard de Checkout
 
-O componente `InputNumber` foi utilizado para alterar a quantidade de produtos no carrinho de forma mais prática.
+Impede que usuários não autenticados acessem a finalização da compra.
 
-Com isso, o usuário pode incrementar ou reduzir a quantidade dos itens de maneira mais intuitiva, mantendo a reatividade da aplicação.
+Fluxo:
 
----
-
-### 🧮 Total de Itens e Preço Final
-
-A aplicação continua exibindo:
-
-- Total de itens no carrinho
-- Preço final da compra
-
-Esses valores são atualizados de forma reativa conforme os produtos são adicionados ou suas quantidades são alteradas.
+```text
+Usuário não autenticado
+       ↓
+Tentativa de acessar Checkout
+       ↓
+Acesso negado
+```
 
 ---
 
-## 🔥 Desafio Extra
+### 👑 Guard de Role
 
-Além da migração básica para PrimeVue e Tailwind, a atividade também propôs melhorias de experiência premium.
+Foi implementado controle de acesso baseado em perfil.
 
-Possíveis melhorias previstas:
+Apenas usuários com Role:
 
-- Empty State para carrinho vazio
-- Confirmação antes de remover todos os itens
-- Implementação de tema claro/escuro
-- Uso de `ConfirmDialog`
-- Integração com classes `dark:` do Tailwind
+```typescript
+ADMIN
+```
+
+podem acessar rotas administrativas.
+
+Fluxo:
+
+```text
+Usuário CUSTOMER
+       ↓
+Tentativa de acessar Admin
+       ↓
+Acesso negado
+```
+
+---
+
+## 🔥 Recursos Avançados
+
+### 📊 Gestão de Produtos
+
+A área administrativa foi preparada para utilização de tabelas de gerenciamento.
+
+Utilizando:
+
+```vue
+<DataTable>
+```
+
+do PrimeVue.
+
+Permite:
+
+- Visualizar produtos
+- Organizar informações
+- Facilitar futuras operações CRUD
+
+---
+
+### 🍞 Breadcrumbs Dinâmicos
+
+Foi adicionada navegação hierárquica através de Breadcrumbs.
+
+Exemplo:
+
+```text
+Home > Produtos > Notebook Gamer
+```
+
+Melhorando a experiência de navegação.
+
+---
+
+### 🧩 Nested Routes
+
+As rotas administrativas foram organizadas utilizando rotas filhas.
+
+Exemplo:
+
+```text
+/admin
+/admin/products
+/admin/reports
+```
+
+Benefícios:
+
+- Melhor organização
+- Maior escalabilidade
+- Estrutura profissional
+
+---
+
+## 🔄 Fluxo de Navegação
+
+```text
+Home
+ │
+ ├── Produto
+ │       │
+ │       └── Detalhes
+ │
+ └── Checkout
+         │
+         └── Guard de Autenticação
+
+Admin
+ │
+ ├── Dashboard
+ ├── Produtos
+ └── Relatórios
+```
 
 ---
 
 ## 🏗️ Estrutura da Aplicação
 
-A aplicação segue uma estrutura baseada em componentes, mantendo a separação entre lógica, visualização e tipagem.
-
 ```text
 src/
+├── router/
+│   └── index.ts
+│
+├── layouts/
+│   ├── ConsumerLayout.vue
+│   └── AdminLayout.vue
+│
+├── views/
+│   ├── HomeView.vue
+│   ├── ProductDetailsView.vue
+│   ├── CheckoutView.vue
+│   ├── AdminDashboardView.vue
+│   ├── ProductsView.vue
+│   └── ReportsView.vue
+│
 ├── components/
-│   └── ProductCard.vue
+│   ├── ProductCard.vue
+│   ├── Cart.vue
+│   └── Navbar.vue
 │
-├── models/
-│   ├── Category.ts
-│   ├── Product.ts
-│   ├── User.ts
-│   └── Cart.ts
-│   └── CartItem.ts
-│
-│
-├── App.vue
-├── main.ts
-└── style.css
+└── App.vue
 ```
 
 ---
 
 ## 📚 Conceitos Praticados
 
-### Vue
+### Vue Router
 
-- Componentização
-- Props
-- Eventos personalizados
-- Reatividade
-- Options API
+- Rotas
+- Rotas dinâmicas
+- Nested Routes
+- Route Guards
+- Navegação SPA
+
+### Segurança
+
+- Controle de autenticação
+- Controle de autorização
+- Proteção de rotas
+- Validação de perfis
+
+### Layouts
+
+- Layout compartilhado
+- Layout administrativo
+- Layout do consumidor
+
+### PrimeVue
+
+- Card
+- Button
+- Menu
+- Menubar
+- DataTable
+- Breadcrumb
+
+### Tailwind CSS
+
+- Grid responsivo
+- Espaçamento
+- Responsividade
+- Organização visual
 
 ### TypeScript
 
 - Interfaces
-- Tipagem de objetos
-- Tipagem de componentes
-- Proteção de dados com tipos
-
-### PrimeVue
-
-- Configuração de plugin
-- Uso de componentes prontos
-- Componentes `Card`
-- Componentes `Button`
-- Componentes `InputNumber`
-
-### Tailwind CSS
-
-- Classes utilitárias
-- Grid responsivo
-- Espaçamentos
-- Sombras
-- Bordas arredondadas
-- Layout adaptável
-
-### E-commerce
-
-- Vitrine de produtos
-- Carrinho de compras
-- Controle de quantidade
-- Cálculo de totais
-- Atualização reativa da interface
+- Tipagem de rotas
+- Tipagem de usuários
+- Tipagem de permissões
 
 ---
 
-## 🔄 Evolução em Relação à Atividade 2
+## 🔄 Evolução em Relação à Atividade 3
 
-Na Atividade 2, o foco estava na estrutura lógica do sistema, incluindo:
+Na Atividade 3, o foco estava na experiência visual da aplicação através da integração entre PrimeVue e Tailwind CSS.
 
-- Models
-- Interfaces
-- Tipagem avançada
-- Carrinho
-- Regras de negócio
-- High-Order Functions
+Nesta Atividade 4, o projeto evoluiu estruturalmente através da implementação de:
 
-Nesta Atividade 3, o projeto evoluiu visualmente com:
+- Vue Router
+- Rotas dinâmicas
+- Layouts independentes
+- Route Guards
+- Controle de permissões
+- Área administrativa
+- Arquitetura escalável
 
-- Integração do PrimeVue
-- Configuração do Tailwind CSS
-- Refatoração do `ProductCard.vue`
-- Melhoria do layout principal
-- Grid responsivo para produtos
-- Carrinho com componentes mais modernos
-- Melhor experiência de uso
+Essa evolução aproxima o projeto da estrutura utilizada em aplicações profissionais de e-commerce.
 
 ---
 
 ## ✅ Critérios Atendidos
 
-- Uso de PrimeVue na interface
-- Uso de pelo menos dois componentes PrimeVue
-- Estilização com Tailwind CSS
-- Layout responsivo
-- Lógica de carrinho preservada
-- Tipagem TypeScript mantida
-- Reatividade da aplicação mantida
-- Interface mais organizada e profissional
+- Navegação entre páginas sem recarregamento
+- Página de detalhes com rota dinâmica
+- Área de checkout protegida
+- Layout administrativo separado
+- Integração com PrimeVue
+- Integração com Tailwind CSS
+- Controle de acesso baseado em Role
+- Estrutura SPA com Vue Router
 
 ---
 
@@ -253,6 +381,7 @@ Nesta Atividade 3, o projeto evoluiu visualmente com:
 ### Ferramentas
 
 - Vue
+- Vue Router
 - TypeScript
 - PrimeVue
 - Tailwind CSS
