@@ -1,244 +1,461 @@
-# 🛒 E-commerce - Atividade 3
+# 🔐 E-commerce - Atividade 5
 
 ## 📖 Sobre esta Atualização
 
-Esta branch contém a terceira etapa de evolução do projeto de e-commerce.
+Esta branch representa a quinta evolução do projeto de e-commerce.
 
-O foco desta atividade foi melhorar a interface da aplicação utilizando **PrimeVue** e **Tailwind CSS**, tornando a experiência visual mais organizada, responsiva e moderna.
+O foco desta etapa foi implementar um sistema de autenticação mais robusto utilizando **Pinia**, **Vuelidate**, **PrimeVue** e **Vue Router**, centralizando o gerenciamento de autenticação da aplicação e garantindo uma experiência de usuário mais segura e intuitiva.
 
-Nesta etapa, a lógica do e-commerce foi mantida, incluindo o funcionamento do carrinho, a tipagem com TypeScript e a estrutura dos produtos. A principal evolução foi a refatoração da interface, substituindo elementos HTML comuns por componentes visuais mais robustos e estilizados.
+Além da autenticação, foram adicionadas validações reativas, feedback visual para o usuário e integração com os Route Guards implementados nas etapas anteriores.
 
 ---
 
 ## 🎯 Objetivos da Atividade
 
-Implementar melhorias na interface do sistema utilizando:
+Implementar:
 
-- PrimeVue
-- Tailwind CSS
-- Componentes reutilizáveis
-- Layout responsivo
-- Componentes visuais para produtos e carrinho
-- Manutenção da reatividade da aplicação
-- Preservação da tipagem com TypeScript
-
----
-
-## 🚀 Funcionalidades e Melhorias Implementadas
-
-### 🧩 Integração com PrimeVue
-
-O projeto foi configurado para utilizar componentes do **PrimeVue**, permitindo uma interface mais profissional e padronizada.
-
-Componentes utilizados na aplicação:
-
-- `Card`
-- `Button`
-- `InputNumber`
-
-Esses componentes substituem elementos HTML comuns e tornam a interface mais elegante e consistente.
+- Gerenciamento centralizado de autenticação
+- Login de usuários
+- Cadastro de usuários
+- Validação reativa de formulários
+- Controle de estado global
+- Feedback visual para sucesso e erro
+- Integração com Route Guards
+- Redirecionamento automático após autenticação
 
 ---
 
-### 🎨 Estilização com Tailwind CSS
+## 🚀 Funcionalidades Implementadas
 
-A estilização foi realizada utilizando classes utilitárias do **Tailwind CSS**, evitando CSS customizado manual.
+### 🔐 Sistema de Autenticação
 
-Foram aplicadas classes para:
+Foi criada uma store exclusiva para autenticação utilizando Pinia.
 
-- Espaçamento
-- Grid responsivo
-- Alinhamento
-- Bordas
-- Sombras
-- Organização visual
-- Responsividade
+A store é responsável por gerenciar:
 
-Exemplo de layout responsivo utilizado:
+```typescript
+user
+token
+isAuthenticated
+```
 
-```html
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+Dessa forma, toda a aplicação passa a consumir uma única fonte de verdade para o estado do usuário.
+
+---
+
+### 🏪 Auth Store (Pinia)
+
+Foi criada uma `authStore` responsável por centralizar toda a lógica de autenticação.
+
+### Estados Gerenciados
+
+```typescript
+user
+token
+isAuthenticated
+loading
 ```
 
 ---
 
-### 🖼️ Refatoração do ProductCard.vue
+### Actions Implementadas
 
-O componente `ProductCard.vue` foi refatorado para utilizar componentes do PrimeVue.
+#### Login
 
-Principais melhorias:
+```typescript
+login()
+```
 
-- Uso do componente `Card`
-- Uso do componente `Button`
-- Melhor organização visual do produto
-- Layout mais limpo e reutilizável
-- Estilização com Tailwind CSS
+Responsável por autenticar o usuário.
 
-Essa alteração deixou a vitrine de produtos mais organizada e visualmente próxima de uma aplicação real de e-commerce.
+Funções:
 
----
-
-### 🏗️ Atualização do Layout Principal
-
-O arquivo `App.vue` foi ajustado para organizar melhor a vitrine de produtos e a área do carrinho.
-
-Melhorias aplicadas:
-
-- Grid responsivo para produtos
-- Separação visual entre vitrine e carrinho
-- Layout adaptável para diferentes tamanhos de tela
-- Melhor espaçamento entre os elementos
+- Validar credenciais
+- Simular autenticação
+- Armazenar usuário
+- Gerar token
+- Atualizar estado global
 
 ---
 
-### 🛒 Carrinho com Componentes PrimeVue
+#### Registro
 
-A área do carrinho foi melhorada com componentes visuais do PrimeVue.
+```typescript
+register()
+```
 
-Melhorias implementadas:
+Responsável por criar uma nova conta.
 
-- Exibição dos itens adicionados ao carrinho
-- Visualização da quantidade de cada item
-- Atualização de quantidade com `InputNumber`
-- Cálculo automático do total de itens
-- Cálculo automático do preço final
+Funções:
 
----
-
-### 🔢 Controle de Quantidade
-
-O componente `InputNumber` foi utilizado para alterar a quantidade de produtos no carrinho de forma mais prática.
-
-Com isso, o usuário pode incrementar ou reduzir a quantidade dos itens de maneira mais intuitiva, mantendo a reatividade da aplicação.
+- Validar dados
+- Simular cadastro
+- Persistir usuário
+- Atualizar autenticação
 
 ---
 
-### 🧮 Total de Itens e Preço Final
+#### Logout
 
-A aplicação continua exibindo:
+```typescript
+logout()
+```
 
-- Total de itens no carrinho
-- Preço final da compra
+Responsável por:
 
-Esses valores são atualizados de forma reativa conforme os produtos são adicionados ou suas quantidades são alteradas.
+- Remover token
+- Limpar usuário
+- Invalidar sessão
+- Redirecionar para Login
 
 ---
 
-## 🔥 Desafio Extra
+## 👤 Tela de Login
 
-Além da migração básica para PrimeVue e Tailwind, a atividade também propôs melhorias de experiência premium.
+Foi criada uma interface dedicada para autenticação.
 
-Possíveis melhorias previstas:
+### Componentes Utilizados
 
-- Empty State para carrinho vazio
-- Confirmação antes de remover todos os itens
-- Implementação de tema claro/escuro
-- Uso de `ConfirmDialog`
-- Integração com classes `dark:` do Tailwind
+```vue
+<Card>
+<InputText>
+<Password>
+<Button>
+```
+
+Campos disponíveis:
+
+- E-mail
+- Senha
+
+---
+
+### Regras de Validação
+
+Utilizando Vuelidate:
+
+#### E-mail
+
+- Obrigatório
+- Formato válido
+
+#### Senha
+
+- Obrigatória
+
+Exemplos:
+
+```text
+E-mail inválido
+```
+
+```text
+Senha obrigatória
+```
+
+---
+
+## 📝 Tela de Cadastro
+
+Foi criada uma tela específica para criação de contas.
+
+### Componentes Utilizados
+
+```vue
+<Card>
+<InputText>
+<Password>
+<Button>
+```
+
+Campos disponíveis:
+
+- Nome
+- E-mail
+- Senha
+- Confirmar senha
+
+---
+
+### Regras de Validação
+
+#### Nome
+
+- Obrigatório
+
+#### E-mail
+
+- Obrigatório
+- Formato válido
+
+#### Senha
+
+- Obrigatória
+- Mínimo de 6 caracteres
+
+#### Confirmar Senha
+
+Validação personalizada garantindo que:
+
+```text
+Senha == Confirmar Senha
+```
+
+Exemplo:
+
+```text
+As senhas não coincidem
+```
+
+---
+
+## 🛡️ Validação Reativa com Vuelidate
+
+Foi implementado o Vuelidate para proteger os formulários antes do envio.
+
+Benefícios:
+
+- Validação automática
+- Feedback instantâneo
+- Bloqueio de envio inválido
+- Melhor experiência de usuário
+
+---
+
+### Feedback Visual de Erros
+
+Campos inválidos recebem destaque visual utilizando Tailwind CSS.
+
+Exemplos:
+
+```text
+Borda vermelha
+Texto vermelho
+Mensagens abaixo do campo
+```
+
+Isso permite ao usuário identificar rapidamente os erros de preenchimento.
+
+---
+
+## 🔥 Recursos de Experiência do Usuário
+
+### 🍞 Toast Notifications
+
+Foi utilizado o componente:
+
+```vue
+<Toast>
+```
+
+para fornecer feedback visual durante a autenticação.
+
+---
+
+### Mensagens de Sucesso
+
+Exemplos:
+
+```text
+Login realizado com sucesso!
+```
+
+```text
+Conta criada com sucesso!
+```
+
+---
+
+### Mensagens de Erro
+
+Exemplos:
+
+```text
+Credenciais inválidas
+```
+
+```text
+Falha ao realizar login
+```
+
+---
+
+### ⏳ Loading State
+
+Os botões de envio utilizam o recurso:
+
+```vue
+loading
+```
+
+durante o processamento das ações.
+
+Benefícios:
+
+- Evita múltiplos envios
+- Melhora a experiência do usuário
+- Simula comunicação com servidor
+
+---
+
+## 🔗 Integração com Vue Router
+
+A autenticação foi integrada às rotas protegidas criadas na atividade anterior.
+
+---
+
+### Redirecionamento Após Login
+
+Após autenticação bem-sucedida:
+
+```text
+Login
+   ↓
+Home
+```
+
+ou
+
+```text
+Login
+   ↓
+Checkout solicitado anteriormente
+```
+
+---
+
+### Redirecionamento Após Logout
+
+Ao realizar logout:
+
+```text
+Logout
+   ↓
+Tela de Login
+```
+
+---
+
+## 🔐 Integração com Route Guards
+
+Os Guards agora utilizam a `authStore` como fonte oficial para validação de acesso.
+
+Fluxo:
+
+```text
+Usuário autenticado?
+      │
+      ├── Sim → Permite acesso
+      │
+      └── Não → Redireciona para Login
+```
 
 ---
 
 ## 🏗️ Estrutura da Aplicação
 
-A aplicação segue uma estrutura baseada em componentes, mantendo a separação entre lógica, visualização e tipagem.
-
 ```text
 src/
+├── stores/
+│   └── authStore.ts
+│
+├── views/
+│   ├── LoginView.vue
+│   └── RegisterView.vue
+│
+├── router/
+│   └── index.ts
+│
+├── layouts/
+│   ├── ConsumerLayout.vue
+│   └── AdminLayout.vue
+│
 ├── components/
-│   └── ProductCard.vue
+│   └── FormComponents.vue
 │
-├── models/
-│   ├── Category.ts
-│   ├── Product.ts
-│   ├── User.ts
-│   └── Cart.ts
-│   └── CartItem.ts
-│
-│
-├── App.vue
-├── main.ts
-└── style.css
+└── App.vue
 ```
 
 ---
 
 ## 📚 Conceitos Praticados
 
-### Vue
+### Pinia
 
-- Componentização
-- Props
-- Eventos personalizados
-- Reatividade
-- Options API
+- Store global
+- State Management
+- Actions
+- Reatividade global
 
-### TypeScript
+### Vuelidate
 
-- Interfaces
-- Tipagem de objetos
-- Tipagem de componentes
-- Proteção de dados com tipos
+- Validações reativas
+- Validação customizada
+- Validação de formulários
+- Feedback de erros
+
+### Vue Router
+
+- Route Guards
+- Redirecionamentos
+- Proteção de rotas
 
 ### PrimeVue
 
-- Configuração de plugin
-- Uso de componentes prontos
-- Componentes `Card`
-- Componentes `Button`
-- Componentes `InputNumber`
+- Card
+- InputText
+- Password
+- Button
+- Toast
 
 ### Tailwind CSS
 
-- Classes utilitárias
-- Grid responsivo
-- Espaçamentos
-- Sombras
-- Bordas arredondadas
-- Layout adaptável
+- Layout responsivo
+- Estados visuais
+- Mensagens de erro
+- Feedback visual
 
-### E-commerce
+### TypeScript
 
-- Vitrine de produtos
-- Carrinho de compras
-- Controle de quantidade
-- Cálculo de totais
-- Atualização reativa da interface
+- Tipagem de usuários
+- Tipagem da store
+- Tipagem de autenticação
 
 ---
 
-## 🔄 Evolução em Relação à Atividade 2
+## 🔄 Evolução em Relação à Atividade 4
 
-Na Atividade 2, o foco estava na estrutura lógica do sistema, incluindo:
+Na Atividade 4 o foco estava na navegação e segurança das rotas.
 
-- Models
-- Interfaces
-- Tipagem avançada
-- Carrinho
-- Regras de negócio
-- High-Order Functions
+Nesta Atividade 5 o projeto evoluiu através da implementação de:
 
-Nesta Atividade 3, o projeto evoluiu visualmente com:
+- Autenticação centralizada
+- Pinia Store
+- Login e Registro
+- Validação com Vuelidate
+- Toast Notifications
+- Loading States
+- Integração completa com Route Guards
+- Controle global de autenticação
 
-- Integração do PrimeVue
-- Configuração do Tailwind CSS
-- Refatoração do `ProductCard.vue`
-- Melhoria do layout principal
-- Grid responsivo para produtos
-- Carrinho com componentes mais modernos
-- Melhor experiência de uso
+Essa evolução aproxima ainda mais o projeto de uma aplicação real utilizada em ambientes de produção.
 
 ---
 
 ## ✅ Critérios Atendidos
 
-- Uso de PrimeVue na interface
-- Uso de pelo menos dois componentes PrimeVue
+- Estado centralizado com Pinia
+- Auth Store como única fonte da verdade
+- Login funcional
+- Registro funcional
+- Logout funcional
+- Validação com Vuelidate
+- Feedback visual para erros
+- Toast para sucesso e falhas
+- Integração com Vue Router
+- Integração com Route Guards
+- Interface construída com PrimeVue
 - Estilização com Tailwind CSS
-- Layout responsivo
-- Lógica de carrinho preservada
-- Tipagem TypeScript mantida
-- Reatividade da aplicação mantida
-- Interface mais organizada e profissional
 
 ---
 
@@ -246,7 +463,7 @@ Nesta Atividade 3, o projeto evoluiu visualmente com:
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=vue,ts,js,tailwind,vite,git,github,vscode" />
+<img src="https://skillicons.dev/icons?i=vue,ts,tailwind,vite,git,github,vscode" />
 
 </div>
 
@@ -254,10 +471,12 @@ Nesta Atividade 3, o projeto evoluiu visualmente com:
 
 - Vue
 - TypeScript
+- Pinia
+- Vuelidate
 - PrimeVue
 - Tailwind CSS
+- Vue Router
 - Vite
-- JavaScript
 - Git
 - GitHub
 - VS Code
