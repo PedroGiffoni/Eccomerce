@@ -1,270 +1,503 @@
-# 🛒 E-commerce - Atividade 3
+# 🚀 E-commerce - Atividade 6
 
 ## 📖 Sobre esta Atualização
 
-Esta branch contém a terceira etapa de evolução do projeto de e-commerce.
+Esta branch representa a sexta evolução do projeto de e-commerce.
 
-O foco desta atividade foi melhorar a interface da aplicação utilizando **PrimeVue** e **Tailwind CSS**, tornando a experiência visual mais organizada, responsiva e moderna.
+Após as etapas anteriores focadas no Frontend, interface do usuário, gerenciamento de estado e autenticação, esta atividade marca a introdução do Backend da aplicação utilizando **Node.js**, **Express** e **TypeScript**.
 
-Nesta etapa, a lógica do e-commerce foi mantida, incluindo o funcionamento do carrinho, a tipagem com TypeScript e a estrutura dos produtos. A principal evolução foi a refatoração da interface, substituindo elementos HTML comuns por componentes visuais mais robustos e estilizados.
+O objetivo desta etapa foi implementar uma API REST responsável por gerenciar produtos e pedidos, aplicando boas práticas de roteamento, utilização correta dos verbos HTTP, tratamento de requisições e respostas, uso de status codes e organização do código em múltiplos routers.
 
 ---
 
 ## 🎯 Objetivos da Atividade
 
-Implementar melhorias na interface do sistema utilizando:
+Implementar:
 
-- PrimeVue
-- Tailwind CSS
-- Componentes reutilizáveis
-- Layout responsivo
-- Componentes visuais para produtos e carrinho
-- Manutenção da reatividade da aplicação
-- Preservação da tipagem com TypeScript
-
----
-
-## 🚀 Funcionalidades e Melhorias Implementadas
-
-### 🧩 Integração com PrimeVue
-
-O projeto foi configurado para utilizar componentes do **PrimeVue**, permitindo uma interface mais profissional e padronizada.
-
-Componentes utilizados na aplicação:
-
-- `Card`
-- `Button`
-- `InputNumber`
-
-Esses componentes substituem elementos HTML comuns e tornam a interface mais elegante e consistente.
+- API REST com Express
+- Rotas para produtos
+- Rotas para pedidos
+- Captura de parâmetros via URL
+- Captura de Query Strings
+- Captura de dados via Body
+- Utilização correta dos métodos HTTP
+- Organização do código com Routers
+- Middleware de Logs
+- Middleware de Validação
+- Tipagem com TypeScript
 
 ---
 
-### 🎨 Estilização com Tailwind CSS
+## 🏗️ Arquitetura da API
 
-A estilização foi realizada utilizando classes utilitárias do **Tailwind CSS**, evitando CSS customizado manual.
-
-Foram aplicadas classes para:
-
-- Espaçamento
-- Grid responsivo
-- Alinhamento
-- Bordas
-- Sombras
-- Organização visual
-- Responsividade
-
-Exemplo de layout responsivo utilizado:
-
-```html
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-```
-
----
-
-### 🖼️ Refatoração do ProductCard.vue
-
-O componente `ProductCard.vue` foi refatorado para utilizar componentes do PrimeVue.
-
-Principais melhorias:
-
-- Uso do componente `Card`
-- Uso do componente `Button`
-- Melhor organização visual do produto
-- Layout mais limpo e reutilizável
-- Estilização com Tailwind CSS
-
-Essa alteração deixou a vitrine de produtos mais organizada e visualmente próxima de uma aplicação real de e-commerce.
-
----
-
-### 🏗️ Atualização do Layout Principal
-
-O arquivo `App.vue` foi ajustado para organizar melhor a vitrine de produtos e a área do carrinho.
-
-Melhorias aplicadas:
-
-- Grid responsivo para produtos
-- Separação visual entre vitrine e carrinho
-- Layout adaptável para diferentes tamanhos de tela
-- Melhor espaçamento entre os elementos
-
----
-
-### 🛒 Carrinho com Componentes PrimeVue
-
-A área do carrinho foi melhorada com componentes visuais do PrimeVue.
-
-Melhorias implementadas:
-
-- Exibição dos itens adicionados ao carrinho
-- Visualização da quantidade de cada item
-- Atualização de quantidade com `InputNumber`
-- Cálculo automático do total de itens
-- Cálculo automático do preço final
-
----
-
-### 🔢 Controle de Quantidade
-
-O componente `InputNumber` foi utilizado para alterar a quantidade de produtos no carrinho de forma mais prática.
-
-Com isso, o usuário pode incrementar ou reduzir a quantidade dos itens de maneira mais intuitiva, mantendo a reatividade da aplicação.
-
----
-
-### 🧮 Total de Itens e Preço Final
-
-A aplicação continua exibindo:
-
-- Total de itens no carrinho
-- Preço final da compra
-
-Esses valores são atualizados de forma reativa conforme os produtos são adicionados ou suas quantidades são alteradas.
-
----
-
-## 🔥 Desafio Extra
-
-Além da migração básica para PrimeVue e Tailwind, a atividade também propôs melhorias de experiência premium.
-
-Possíveis melhorias previstas:
-
-- Empty State para carrinho vazio
-- Confirmação antes de remover todos os itens
-- Implementação de tema claro/escuro
-- Uso de `ConfirmDialog`
-- Integração com classes `dark:` do Tailwind
-
----
-
-## 🏗️ Estrutura da Aplicação
-
-A aplicação segue uma estrutura baseada em componentes, mantendo a separação entre lógica, visualização e tipagem.
+A aplicação foi estruturada utilizando o padrão de separação por rotas.
 
 ```text
-src/
-├── components/
-│   └── ProductCard.vue
-│
-├── models/
-│   ├── Category.ts
-│   ├── Product.ts
-│   ├── User.ts
-│   └── Cart.ts
-│   └── CartItem.ts
-│
-│
-├── App.vue
-├── main.ts
-└── style.css
+Cliente
+   │
+   ▼
+Express Server
+   │
+   ├── Products Router
+   │
+   ├── Orders Router
+   │
+   └── Middlewares
+```
+
+Essa abordagem facilita a manutenção e a escalabilidade do projeto.
+
+---
+
+# 📦 Rotas de Produtos
+
+## 📋 Listagem de Produtos
+
+### Endpoint
+
+```http
+GET /products
+```
+
+Responsável por retornar a lista completa de produtos.
+
+---
+
+### Filtragem por Categoria
+
+A rota também permite receber uma Query String para filtragem.
+
+Exemplo:
+
+```http
+GET /products?category=eletronicos
+```
+
+Parâmetro utilizado:
+
+```typescript
+req.query.category
+```
+
+Benefícios:
+
+- Filtragem dinâmica
+- Maior flexibilidade para o cliente
+- Simulação de catálogo de produtos
+
+---
+
+## 🔍 Consulta de Produto por ID
+
+### Endpoint
+
+```http
+GET /products/:id
+```
+
+Permite consultar um produto específico.
+
+Exemplo:
+
+```http
+GET /products/5
+```
+
+Parâmetro utilizado:
+
+```typescript
+req.params.id
 ```
 
 ---
 
-## 📚 Conceitos Praticados
+### Validação de ID
 
-### Vue
+Foi implementada uma validação para impedir IDs negativos.
 
-- Componentização
-- Props
-- Eventos personalizados
-- Reatividade
-- Options API
+Exemplo:
 
-### TypeScript
+```http
+GET /products/-1
+```
 
-- Interfaces
-- Tipagem de objetos
-- Tipagem de componentes
-- Proteção de dados com tipos
+Resposta:
 
-### PrimeVue
-
-- Configuração de plugin
-- Uso de componentes prontos
-- Componentes `Card`
-- Componentes `Button`
-- Componentes `InputNumber`
-
-### Tailwind CSS
-
-- Classes utilitárias
-- Grid responsivo
-- Espaçamentos
-- Sombras
-- Bordas arredondadas
-- Layout adaptável
-
-### E-commerce
-
-- Vitrine de produtos
-- Carrinho de compras
-- Controle de quantidade
-- Cálculo de totais
-- Atualização reativa da interface
+```http
+400 Bad Request
+```
 
 ---
 
-## 🔄 Evolução em Relação à Atividade 2
+# 🛒 Rotas de Pedidos
 
-Na Atividade 2, o foco estava na estrutura lógica do sistema, incluindo:
+## ➕ Criação de Pedido
 
-- Models
-- Interfaces
-- Tipagem avançada
-- Carrinho
-- Regras de negócio
-- High-Order Functions
+### Endpoint
 
-Nesta Atividade 3, o projeto evoluiu visualmente com:
+```http
+POST /orders
+```
 
-- Integração do PrimeVue
-- Configuração do Tailwind CSS
-- Refatoração do `ProductCard.vue`
-- Melhoria do layout principal
-- Grid responsivo para produtos
-- Carrinho com componentes mais modernos
-- Melhor experiência de uso
+Responsável por simular a criação de um novo pedido.
 
 ---
 
-## ✅ Critérios Atendidos
+### Dados Recebidos
 
-- Uso de PrimeVue na interface
-- Uso de pelo menos dois componentes PrimeVue
-- Estilização com Tailwind CSS
-- Layout responsivo
-- Lógica de carrinho preservada
-- Tipagem TypeScript mantida
-- Reatividade da aplicação mantida
-- Interface mais organizada e profissional
+O servidor recebe informações através do Body da requisição.
+
+Exemplo:
+
+```json
+{
+  "customerName": "Pedro",
+  "products": [1, 2, 3]
+}
+```
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+### Resposta
+
+Status:
+
+```http
+201 Created
+```
+
+Retornando os dados recebidos como confirmação da criação.
+
+---
+
+## 🔄 Atualização de Pedido
+
+### Endpoint
+
+```http
+PATCH /orders/:id
+```
+
+Responsável por atualizar informações de um pedido existente.
+
+---
+
+### Exemplo
+
+URL:
+
+```http
+PATCH /orders/10
+```
+
+Body:
+
+```json
+{
+  "status": "pago"
+}
+```
+
+---
+
+### Dados Utilizados
+
+Parâmetros:
+
+```typescript
+req.params.id
+```
+
+Body:
+
+```typescript
+req.body.status
+```
+
+---
+
+## ❌ Cancelamento de Pedido
+
+### Endpoint
+
+```http
+DELETE /orders/:id
+```
+
+Responsável por simular o cancelamento de um pedido.
+
+---
+
+### Resposta
+
+Status:
+
+```http
+204 No Content
+```
+
+Sem retorno de conteúdo no corpo da resposta.
+
+---
+
+# 🔥 Recursos Extras Implementados
+
+## 📝 Middleware de Logger
+
+Foi criado um middleware responsável por registrar todas as requisições recebidas pelo servidor.
+
+Formato exibido:
+
+```text
+[DATA] MÉTODO /URL
+```
+
+Exemplo:
+
+```text
+[2026-06-09] GET /products
+```
+
+---
+
+## 🛡️ Middleware de Validação
+
+Antes de criar um pedido, o sistema verifica se o Body foi enviado corretamente.
+
+Caso o corpo da requisição esteja vazio:
+
+Resposta:
+
+```http
+400 Bad Request
+```
+
+Exemplo:
+
+```json
+{
+  "error": "Body da requisição não pode estar vazio"
+}
+```
+
+---
+
+## 📂 Separação por Routers
+
+Para manter o código organizado, as rotas foram divididas em arquivos específicos.
+
+### Products Router
+
+Responsável por:
+
+- Listagem de produtos
+- Consulta por ID
+- Filtragem por categoria
+
+---
+
+### Orders Router
+
+Responsável por:
+
+- Criação de pedidos
+- Atualização de status
+- Cancelamento de pedidos
+
+---
+
+# 🌐 Métodos HTTP Utilizados
+
+## GET
+
+Utilizado para leitura de dados.
+
+Exemplos:
+
+```http
+GET /products
+GET /products/:id
+```
+
+---
+
+## POST
+
+Utilizado para criação de registros.
+
+Exemplo:
+
+```http
+POST /orders
+```
+
+---
+
+## PATCH
+
+Utilizado para atualização parcial.
+
+Exemplo:
+
+```http
+PATCH /orders/:id
+```
+
+---
+
+## DELETE
+
+Utilizado para remoção de registros.
+
+Exemplo:
+
+```http
+DELETE /orders/:id
+```
+
+---
+
+# 📚 Conceitos Praticados
+
+## Express
+
+- Criação de servidor
+- Rotas
+- Middlewares
+- Routers
+
+---
+
+## REST API
+
+- GET
+- POST
+- PATCH
+- DELETE
+- Semântica REST
+
+---
+
+## TypeScript
+
+- Request
+- Response
+- NextFunction
+- Tipagem de parâmetros
+- Tipagem de respostas
+
+---
+
+## Manipulação de Requisições
+
+### Query String
+
+```typescript
+req.query
+```
+
+---
+
+### Params
+
+```typescript
+req.params
+```
+
+---
+
+### Body
+
+```typescript
+req.body
+```
+
+---
+
+## Validação
+
+- IDs inválidos
+- Body vazio
+- Tratamento de erros
+- Status HTTP adequados
+
+---
+
+# 🔄 Evolução em Relação à Atividade 5
+
+Na Atividade 5, o foco estava no gerenciamento de autenticação utilizando Pinia, Vuelidate e PrimeVue.
+
+Nesta Atividade 6, o projeto evoluiu para uma arquitetura Full Stack através da criação do Backend da aplicação.
+
+Principais avanços:
+
+- Introdução ao Express
+- Introdução ao Node.js
+- Construção de API REST
+- Organização por Routers
+- Uso de Middlewares
+- Manipulação de Requests e Responses
+- Aplicação de Status Codes
+- Estrutura preparada para integração futura com banco de dados
+
+---
+
+# ✅ Critérios Atendidos
+
+- Uso correto dos verbos HTTP
+- GET para leitura de dados
+- POST para criação de registros
+- PATCH para atualização
+- DELETE para remoção
+- Captura de Query Strings
+- Captura de Params
+- Captura de Body
+- Middleware de Logger
+- Middleware de Validação
+- Separação por Routers
+- Tipagem com TypeScript
+- Utilização correta de Status Codes
+
+---
+
+# 🛠️ Tecnologias Utilizadas
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=vue,ts,js,tailwind,vite,git,github,vscode" />
+<img src="https://skillicons.dev/icons?i=nodejs,express,ts,git,github,vscode" />
 
 </div>
 
 ### Ferramentas
 
-- Vue
+- Node.js
+- Express
 - TypeScript
-- PrimeVue
-- Tailwind CSS
-- Vite
-- JavaScript
 - Git
 - GitHub
 - VS Code
 
 ---
 
-## 👨‍💻 Autor
+# 📂 Estrutura do Projeto
+
+```text
+src/
+├── routes/
+│   ├── products.routes.ts
+│   └── orders.routes.ts
+│
+├── middlewares/
+│   ├── logger.ts
+│   └── validateBody.ts
+│
+├── app.ts
+└── server.ts
+```
+
+---
+
+# 👨‍💻 Autor
 
 <div align="center">
 
