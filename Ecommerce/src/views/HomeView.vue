@@ -1,75 +1,134 @@
 <template>
-  <div class="p-6">
-    <h1 class="text-3xl font-bold mb-6">E-commerce Vue</h1>
+  <div class="space-y-10 min-h-screen bg-slate p-6 rounded-3xl">
+    <section
+      class="bg-gradient-to-r from-blue-400 to-indigo-700 text-white rounded-2xl p-10 shadow-xl"
+    >
+      <div class="max-w-3xl">
+        <p class="uppercase tracking-widest text-sm mb-3 opacity-80">
+          Tecnologia, performance e estilo
+        </p>
 
-    <h2 class="text-2xl mb-4">Produtos</h2>
+        <h1 class="text-5xl font-bold mb-4">Bem-vindo a Eletrocommerce</h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <ProductCard
-        v-for="product in products"
-        :key="product.id"
-        :product="product"
-        @add-product="addToCart"
-      />
-    </div>
+        <p class="text-xl mb-6">
+          Os melhores produtos de tecnologia para você comprar com praticidade.
+        </p>
 
-    <div class="mt-10 border-t pt-6">
-      <h2 class="text-2xl mb-4">Carrinho</h2>
+        <Button label="Ver Produtos" icon="pi pi-shopping-bag" severity="secondary" />
+      </div>
+    </section>
 
-      <p>
-        Total de itens:
-        <strong>{{ totalItems }}</strong>
-      </p>
+    <section>
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="text-3xl font-bold text-white">Produtos em destaque</h2>
 
-      <p>
-        Preço Final:
-        <strong> R$ {{ finalPrice.toFixed(2) }} </strong>
-      </p>
-
-      <h3 class="mt-4 text-xl">Itens</h3>
-
-      <div v-if="cartItems.length === 0">
-        <Card>
-          <template #content> Seu carrinho está vazio 🛒 </template>
-        </Card>
+          <p class="text-white-500">Escolha seus produtos favoritos e adicione ao carrinho.</p>
+        </div>
       </div>
 
-      <ul v-else class="list-disc pl-6">
-        <li v-for="item in cartItems" :key="item.product.id" class="mb-2">
-          {{ item.product.name }}
-          x
-          {{ item.quantity }}
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <ProductCard
+          v-for="product in products"
+          :key="product.id"
+          :product="product"
+          @add-product="addToCart"
+        />
+      </div>
+    </section>
 
-          <Button
-            icon="pi pi-minus"
-            severity="warn"
-            size="small"
-            class="ml-2"
-            @click="removeFromCart(item.product)"
-          />
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <Card class="lg:col-span-2 shadow-xl border-0 bg-white/90 backdrop-blur-sm">
+        <template #title>
+          <div class="flex items-center gap-2">
+            <i class="pi pi-shopping-cart text-blue-600"></i>
+            <span>Carrinho de Compras</span>
+          </div>
+        </template>
 
-          <Button
-            icon="pi pi-trash"
-            severity="danger"
-            size="small"
-            class="ml-2"
-            @click="removeItem(item.product)"
-          />
-        </li>
-      </ul>
-    </div>
+        <template #content>
+          <div v-if="cartItems.length === 0" class="text-center py-8 text-gray-500">
+            <i class="pi pi-shopping-cart text-5xl mb-4"></i>
+
+            <p class="text-lg">Seu carrinho está vazio.</p>
+
+            <p class="text-sm">Adicione produtos para visualizar seu pedido aqui.</p>
+          </div>
+
+          <div v-else class="space-y-4">
+            <div
+              v-for="item in cartItems"
+              :key="item.product.id"
+              class="flex items-center justify-between border rounded-xl p-4"
+            >
+              <div>
+                <p class="font-bold">
+                  {{ item.product.name }}
+                </p>
+
+                <p class="text-sm text-gray-500">Quantidade: {{ item.quantity }}</p>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <Button
+                  icon="pi pi-minus"
+                  severity="warn"
+                  size="small"
+                  @click="removeFromCart(item.product)"
+                />
+
+                <Button
+                  icon="pi pi-trash"
+                  severity="danger"
+                  size="small"
+                  @click="removeItem(item.product)"
+                />
+              </div>
+            </div>
+          </div>
+        </template>
+      </Card>
+
+      <Card class="shadow-md">
+        <template #title> Resumo do Pedido </template>
+
+        <template #content>
+          <div class="space-y-4">
+            <div class="flex justify-between">
+              <span>Total de itens</span>
+              <strong>{{ totalItems }}</strong>
+            </div>
+
+            <div class="flex justify-between text-xl">
+              <span>Total</span>
+              <strong class="text-green-600"> R$ {{ finalPrice.toFixed(2) }} </strong>
+            </div>
+
+            <Button
+              label="Finalizar Compra"
+              icon="pi pi-credit-card"
+              class="w-full"
+              :disabled="cartItems.length === 0"
+              @click="$router.push('/checkout')"
+            />
+          </div>
+        </template>
+      </Card>
+    </section>
   </div>
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
+
 import Card from "primevue/card";
 import Button from "primevue/button";
-import { defineComponent } from "vue";
 
 import ProductCard from "../components/ProductCard.vue";
 
+import { useCartStore } from "../stores/cartStore";
+
 import type { Product } from "../models/Product";
-import type { CartItem } from "../models/CartItem";
 
 export default defineComponent({
   name: "HomeView",
@@ -86,6 +145,14 @@ export default defineComponent({
         id: 1,
         name: "Notebook",
         price: 3500,
+        image: "/products/notebook1.png",
+        images: [
+          "/products/notebook1.png",
+          "/products/notebook2.png",
+          "/products/notebook3.png",
+          "/products/notebook4.png",
+          "/products/notebook5.png",
+        ],
         category: {
           id: 1,
           title: "Eletrônicos",
@@ -96,6 +163,14 @@ export default defineComponent({
         id: 2,
         name: "Mouse Gamer",
         price: 150,
+        image: "/products/mouse1.png",
+        images: [
+          "/products/mouse1.png",
+          "/products/mouse2.png",
+          "/products/mouse3.png",
+          "/products/mouse4.png",
+          "/products/mouse5.png",
+        ],
         category: {
           id: 1,
           title: "Eletrônicos",
@@ -106,6 +181,14 @@ export default defineComponent({
         id: 3,
         name: "Teclado Mecânico",
         price: 250,
+        image: "/products/teclado1.png",
+        images: [
+          "/products/teclado1.png",
+          "/products/teclado2.png",
+          "/products/teclado3.png",
+          "/products/teclado4.png",
+          "/products/teclado5.png",
+        ],
         category: {
           id: 1,
           title: "Eletrônicos",
@@ -115,47 +198,38 @@ export default defineComponent({
 
     return {
       products,
-      cartItems: [] as CartItem[],
     };
+  },
+
+  computed: {
+    cartStore() {
+      return useCartStore();
+    },
+
+    cartItems() {
+      return this.cartStore.cartItems;
+    },
+
+    totalItems(): number {
+      return this.cartStore.totalItems;
+    },
+
+    finalPrice(): number {
+      return this.cartStore.finalPrice;
+    },
   },
 
   methods: {
     addToCart(product: Product) {
-      const item = this.cartItems.find((item) => item.product.id === product.id);
-
-      if (item) {
-        item.quantity++;
-      } else {
-        this.cartItems.push({
-          product,
-          quantity: 1,
-        });
-      }
+      this.cartStore.addToCart(product);
     },
+
     removeFromCart(product: Product) {
-      const item = this.cartItems.find((item) => item.product.id === product.id);
-
-      if (!item) return;
-
-      item.quantity--;
-
-      if (item.quantity <= 0) {
-        this.cartItems = this.cartItems.filter((cartItem) => cartItem.product.id !== product.id);
-      }
+      this.cartStore.removeFromCart(product);
     },
 
     removeItem(product: Product) {
-      this.cartItems = this.cartItems.filter((item) => item.product.id !== product.id);
-    },
-  },
-
-  computed: {
-    totalItems(): number {
-      return this.cartItems.reduce((total, item) => total + item.quantity, 0);
-    },
-
-    finalPrice(): number {
-      return this.cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
+      this.cartStore.removeItem(product);
     },
   },
 });

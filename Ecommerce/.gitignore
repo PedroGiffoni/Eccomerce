@@ -37,3 +37,27 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+# Node
+node_modules
+
+# Logs
+logs
+*.log
+
+# Environment
+.env
+
+# Build
+dist
+build
+
+# Vite
+.vite
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db

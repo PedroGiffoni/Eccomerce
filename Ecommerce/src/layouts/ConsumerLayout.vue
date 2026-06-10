@@ -1,6 +1,13 @@
 <template>
-  <div>
-    <Menubar :model="items">
+  <div class="min-h-screen bg-slate">
+    <Menubar :model="items" class="shadow-md">
+      <template #start>
+        <div class="flex items-center gap-2">
+          <i class="pi pi-shopping-bag text-2xl text-blue-600"></i>
+          <span class="font-bold text-xl"> Eletrocommerce </span>
+        </div>
+      </template>
+
       <template #end>
         <Button
           v-if="authStore.isAuthenticated"
