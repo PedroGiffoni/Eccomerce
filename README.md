@@ -1,326 +1,580 @@
-# 🛒 Atividade 1 - Sistema de E-commerce com TypeScript
+# 🛒 E-commerce Full Stack
 
 ## 📖 Sobre o Projeto
 
-Este projeto foi desenvolvido como parte dos estudos de **Programação Orientada a Objetos (POO)** e **Tipagem Avançada em TypeScript**, simulando a estrutura básica de um sistema de e-commerce.
+Este projeto consiste no desenvolvimento completo de uma plataforma de E-commerce Full Stack construída ao longo de diversas atividades práticas de formação em desenvolvimento web.
 
-O objetivo foi modelar entidades comuns em aplicações de comércio eletrônico, como produtos, categorias, usuários e carrinho de compras, aplicando boas práticas de desenvolvimento, tipagem forte e regras de negócio.
+Durante sua evolução, foram aplicados conceitos de:
 
-Além disso, foram utilizados recursos modernos do TypeScript para garantir maior segurança durante o desenvolvimento, reduzindo erros e tornando o código mais escalável e de fácil manutenção.
+- Programação Orientada a Objetos (POO)
+- TypeScript
+- Vue 3
+- PrimeVue
+- Tailwind CSS
+- Vue Router
+- Pinia
+- Vuelidate
+- Node.js
+- Express
+- Zod
+- Arquitetura REST
+- Middlewares
+- Controllers
+- Validação de Dados
 
----
-
-## 🎯 Objetivo do Desafio
-
-Desenvolver uma estrutura de e-commerce utilizando TypeScript com foco em:
-
-- Modelagem de entidades
-- Programação Orientada a Objetos
-- Tipagem forte
-- Interfaces
-- Enums ou Literal Types
-- Manipulação de Arrays
-- Regras de negócio
-- High-Order Functions (HOF)
-
----
-
-## ⚙️ Funcionalidades Implementadas
-
-### 📂 Categorias
-
-Cada categoria possui:
-
-```typescript
-id
-name
-```
-
-Responsável por organizar os produtos do sistema.
+O projeto evoluiu gradualmente desde a modelagem das entidades do domínio até a implementação de um backend estruturado, autenticação, gerenciamento de estado global, validações robustas e uma interface moderna e responsiva.
 
 ---
 
-### 📦 Produtos
+# 🚀 Principais Funcionalidades
 
-Cada produto possui:
+## 🏠 Catálogo de Produtos
 
-```typescript
-id
-name
-price
-category
-```
-
-O atributo `category` é tipado utilizando a interface `Category`.
+- Listagem de produtos
+- Organização por categorias
+- Visualização detalhada
+- Filtragem por categoria
+- Navegação dinâmica entre produtos
 
 ---
 
-### 👤 Usuários
+## 📦 Gerenciamento de Produtos
 
-Cada usuário possui:
+- Cadastro de produtos
+- Atualização de informações
+- Exclusão de produtos
+- Associação entre produtos e categorias
+- Validação de dados
 
-```typescript
-id
-username
-email
-role
-```
+---
 
-O atributo `role` aceita apenas os valores:
+## 📂 Gerenciamento de Categorias
 
-```typescript
+- Cadastro de categorias
+- Atualização de categorias
+- Exclusão de categorias
+- Paginação de resultados
+- Validação de UUID
+
+---
+
+## 🛒 Carrinho de Compras
+
+- Adição de produtos
+- Atualização de quantidade
+- Remoção de itens
+- Cálculo automático do valor total
+- Cálculo automático da quantidade total
+
+---
+
+## 💳 Checkout
+
+- Resumo do pedido
+- Validação de autenticação
+- Proteção de acesso via Route Guards
+- Simulação de finalização de compra
+
+---
+
+## 🔐 Sistema de Autenticação
+
+- Login
+- Cadastro de usuários
+- Logout
+- Persistência de sessão
+- Controle de acesso
+
+---
+
+## 👤 Controle de Perfis
+
+Perfis suportados:
+
+```text
+>>>>>>> melhoria-frontend
 ADMIN
 CUSTOMER
 ```
 
-Garantindo segurança em tempo de compilação.
+=====
+
+Permissões diferenciadas para:
+
+- Área administrativa
+- Área do cliente
+- Rotas protegidas
 
 ---
 
-### 🛒 Carrinho de Compras
+## 📋 Dashboard Administrativo
 
-O carrinho permite armazenar produtos através da interface:
+- Área exclusiva para administradores
+- Gestão de produtos
+- Gestão de categorias
+- Estrutura preparada para relatórios
+- Navegação independente
 
-```typescript
-CartItem
-```
+---
 
-Contendo:
+# 🏗️ Arquitetura do Projeto
 
-```typescript
-product
-quantity
+## Frontend
+
+```text
+Vue 3
+│
+├── Components
+├── Views
+├── Layouts
+├── Router
+├── Pinia Stores
+└── Vuelidate
+>>>>>>> melhoria-frontend
 ```
 
 ---
 
-### ➕ Adicionar Produtos ao Carrinho
+## Backend
 
-Ao adicionar um produto:
-
-- Caso ele ainda não exista no carrinho, é criado um novo item.
-- Caso já exista, a quantidade é incrementada automaticamente.
-
-Evita duplicação de registros.
+```text
+Express
+│
+├── Routers
+├── Controllers
+├── Middlewares
+├── Schemas (Zod)
+└── REST API
+```
 
 ---
 
-### 📦 Quantidade Total de Itens
+# 🎨 Frontend
 
-O método:
+## Tecnologias Utilizadas
 
-```typescript
-getTotalItems()
+- Vue 3
+- TypeScript
+- PrimeVue
+- Tailwind CSS
+- Pinia
+- Vue Router
+- Vuelidate
+- Vite
+
+---
+
+## Interface Moderna
+
+A interface foi desenvolvida utilizando PrimeVue e Tailwind CSS.
+
+### Componentes Utilizados
+
+- Card
+- Button
+- InputText
+- Password
+- InputNumber
+- Menubar
+- DataTable
+- Toast
+- ConfirmDialog
+- Breadcrumb
+
+---
+
+## Responsividade
+
+A aplicação adapta-se automaticamente para:
+
+- Smartphones
+- Tablets
+- Notebooks
+- Monitores Desktop
+
+---
+
+## Componentização
+
+```text
+components/
+├── ProductCard.vue
+├── Navbar.vue
+├── Cart.vue
+├── ProductGallery.vue
+├── CheckoutSummary.vue
+└── AuthForms.vue
 ```
 
-Retorna a soma de todas as unidades presentes no carrinho.
+---
+
+## Navegação
+
+Implementada utilizando Vue Router.
+
+### Recursos
+
+- Rotas Dinâmicas
+- Nested Routes
+- Route Guards
+- Layouts distintos
+- Navegação SPA
+
+---
+
+## Gerenciamento de Estado
+
+Implementado com Pinia.
+
+### Stores
+
+- Auth Store
+- Cart Store
+- Product Store
+
+---
+
+## Validação de Formulários
+
+Implementada com Vuelidate.
+
+### Validações
+
+- Campos obrigatórios
+- E-mail válido
+- Senha mínima
+- Confirmação de senha
+- Feedback visual instantâneo
+
+---
+
+# ⚙️ Backend
+
+## Tecnologias Utilizadas
+
+- Node.js
+- Express
+- TypeScript
+- Zod
+
+---
+
+## API REST
+
+A API foi desenvolvida seguindo os princípios REST.
+
+### Produtos
+
+```http
+GET     /products
+GET     /products/:id
+POST    /products
+DELETE  /products/:id
+```
+
+---
+
+### Categorias
+
+```http
+GET     /category
+GET     /category/:id
+POST    /category
+PUT     /category/:id
+DELETE  /category/:id
+```
+
+---
+
+### Pedidos
+
+```http
+POST    /orders
+PATCH   /orders/:id
+DELETE  /orders/:id
+```
+
+---
+
+## Query Strings
+
+Exemplo:
+
+```http
+GET /products?category=eletronicos
+```
+
+---
+
+## Params
+
+Exemplo:
+
+```http
+GET /products/1
+```
+
+---
+
+## Body
+
+Exemplo:
+
+```json
+{
+  "name": "Notebook Gamer",
+  "price": 5500,
+  "categoryId": "uuid"
+}
+```
+
+---
+
+# 🛡️ Validação com Zod
+
+O projeto utiliza Zod para validação de:
+
+### Query Strings
+
+```typescript
+req.query;
+```
+
+### Params
+
+```typescript
+req.params;
+```
+
+### Body
+
+```typescript
+req.body;
+```
+
+---
+
+## Validações Implementadas
+
+### Categoria
+
+```typescript
+name;
+```
+
+- Obrigatório
+- Mínimo de 3 caracteres
+
+---
+
+### Produto
+
+```typescript
+name;
+price;
+categoryId;
+```
+
+Validações:
+
+- Nome obrigatório
+- Nome mínimo de 3 caracteres
+- Preço positivo
+- UUID válido
+
+---
+
+# 🔥 Middlewares
+
+## Logger
+
+Registro automático das requisições.
 
 Exemplo:
 
 ```text
-Produto A: 2 unidades
-Produto B: 3 unidades
-
-Total: 5 itens
+[2026-06-10] GET /products
 ```
 
 ---
 
-### 💰 Valor Final da Compra
+## Validation Middleware
 
-O método:
+Validação automática utilizando schemas do Zod.
 
-```typescript
-getFinalPrice()
-```
+Benefícios:
 
-Calcula automaticamente o valor total da compra.
+- Controllers mais limpos
+- Reutilização de código
+- Menos duplicação
 
-Exemplo:
+---
+
+# 🏛️ Arquitetura em Camadas
 
 ```text
-Produto A: R$ 100 x 2
-Produto B: R$ 50 x 3
-
-Total: R$ 350
+Request
+   │
+   ▼
+Router
+   │
+   ▼
+Middleware
+   │
+   ▼
+Controller
+   │
+   ▼
+Response
 ```
 
 ---
 
-## 🔥 Desafio Extra Implementado
+# 📚 Conceitos Aplicados
 
-Para tornar o código mais declarativo e moderno, foram utilizados métodos de High-Order Functions do JavaScript/TypeScript.
+## Frontend
 
-### some()
-
-Utilizado para verificar se um produto já existe no carrinho.
-
-```typescript
-some()
-```
+- Componentização
+- SPA
+- Responsividade
+- UX/UI
+- Reatividade
 
 ---
 
-### reduce()
+## Vue
 
-Utilizado para:
-
-#### Quantidade Total
-
-```typescript
-getTotalItems()
-```
-
-#### Valor Total
-
-```typescript
-getFinalPrice()
-```
+- Vue 3
+- Composition API
+- Options API
+- Props
+- Emits
+- Computed
+- Watch
 
 ---
 
-## 🏗️ Estrutura da Aplicação
+## TypeScript
 
-O projeto foi desenvolvido utilizando:
-
-- Classes
 - Interfaces
-- Enums ou Literal Types
-- Encapsulamento
+- Enums
 - Tipagem Forte
-- High-Order Functions
-- Arrays de Objetos
+- Models
 
 ---
 
-## 📂 Estrutura do Projeto
+## Gerenciamento de Estado
+
+- Pinia
+- Stores Globais
+
+---
+
+## Validação
+
+- Vuelidate
+- Zod
+
+---
+
+## Backend
+
+- Express
+- REST API
+- Controllers
+- Middlewares
+- Routers
+
+---
+
+## Arquitetura
+
+- Separação de Responsabilidades
+- Controllers
+- Schemas
+- Middlewares
+- Organização em Camadas
+
+---
+
+# 📂 Estrutura do Projeto
 
 ```text
 src/
-├── models/
-│   ├── Category.ts
-│   ├── Product.ts
-│   ├── User.ts
-│   └── Cart.ts
+├── frontend/
+│   ├── assets/
+│   ├── components/
+│   ├── interfaces/
+│   ├── layouts/
+│   ├── models/
+│   ├── router/
+│   ├── stores/
+│   ├── views/
+│   └── App.vue
 │
-├── interfaces/
-│   └── CartItem.ts
-│
-└── main.ts
+├── backend/
+│   ├── routers/
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── schemas/
+│   ├── app.ts
+│   └── server.ts
 ```
 
 ---
 
-## 📚 Conceitos Praticados
-
-### Programação Orientada a Objetos
-
-- Classes
-- Objetos
-- Encapsulamento
-- Construtores
-
-### Tipagem Avançada
-
-- Interfaces
-- Enum
-- Literal Types
-
-### Estruturas de Dados
-
-- Arrays
-- Arrays de Objetos
-
-### High-Order Functions
-
-```typescript
-some()
-reduce()
-```
-
-### Boas Práticas
-
-- Tipagem forte
-- Código reutilizável
-- Organização em camadas
-- Regras de negócio isoladas
-
----
-
-## 🛡️ Regras de Negócio
-
-### Integridade da Role
-
-O sistema permite apenas:
-
-```typescript
-ADMIN
-CUSTOMER
-```
-
-Impedindo valores inválidos durante o desenvolvimento.
-
----
-
-### Acúmulo de Produtos
-
-Produtos repetidos não são duplicados no carrinho.
-
-Ao adicionar novamente:
-
-```text
-Produto existente
-+
-Nova quantidade
-=
-Quantidade atualizada
-```
-
----
-
-### Tipagem Completa
-
-O projeto foi desenvolvido sem utilização de:
-
-```typescript
-any
-```
-
-Garantindo maior segurança e previsibilidade no código.
-
----
-
-## 🛠️ Tecnologias Utilizadas
+# 🛠️ Tecnologias Utilizadas
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=ts,js,git,github,vscode" />
+<img src="https://skillicons.dev/icons?i=vue,ts,tailwind,nodejs,express,vite,git,github,vscode" />
 
 </div>
 
+### Frontend
+
+- Vue 3
+- TypeScript
+- PrimeVue
+- Tailwind CSS
+- Pinia
+- Vue Router
+- Vuelidate
+- Vite
+
+### Backend
+
+- Node.js
+- Express
+- TypeScript
+- Zod
+
 ### Ferramentas
 
-- TypeScript
-- JavaScript
 - Git
 - GitHub
 - VS Code
 
 ---
 
-## 🎓 Contexto Acadêmico
+# 🎓 Objetivos de Aprendizagem
 
-Projeto desenvolvido como atividade prática para aplicação dos conceitos de:
+Este projeto foi desenvolvido para consolidar conhecimentos em:
 
+- Desenvolvimento Frontend Moderno
+- Desenvolvimento Backend com Node.js
+- APIs REST
 - Programação Orientada a Objetos
-- Tipagem Avançada
-- Modelagem de Domínio
-- Estruturas de Dados
-- Desenvolvimento de Sistemas de E-commerce
+- TypeScript
+- Gerenciamento de Estado
+- Validação de Dados
+- Arquitetura de Software
+- Desenvolvimento Full Stack
+- Construção de Sistemas de E-commerce
 
 ---
 
-## 👨‍💻 Autor
+# 👨‍💻 Autor
 
 <div align="center">
 
@@ -340,6 +594,6 @@ Projeto desenvolvido como atividade prática para aplicação dos conceitos de:
 
 ---
 
-## ⭐ Apoie o Projeto
+# ⭐ Projeto Acadêmico Full Stack
 
-Se este projeto foi útil para você ou ajudou nos estudos de TypeScript, Programação Orientada a Objetos e modelagem de sistemas de e-commerce, considere deixar uma estrela no repositório.
+Projeto desenvolvido durante a formação Full Stack com foco na construção de uma plataforma completa de E-commerce utilizando tecnologias modernas do ecossistema JavaScript e TypeScript, abrangendo Frontend, Backend, autenticação, gerenciamento de estado, validações e arquitetura REST.
