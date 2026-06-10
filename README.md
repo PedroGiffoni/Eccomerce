@@ -1,244 +1,204 @@
-# 🛒 E-commerce - Atividade 3
+# 🛒 E-commerce Frontend
 
-## 📖 Sobre esta Atualização
+## 📖 Sobre o Projeto
 
-Esta branch contém a terceira etapa de evolução do projeto de e-commerce.
+Este projeto consiste no desenvolvimento de uma aplicação de E-commerce moderna utilizando Vue 3, TypeScript, PrimeVue e Tailwind CSS.
 
-O foco desta atividade foi melhorar a interface da aplicação utilizando **PrimeVue** e **Tailwind CSS**, tornando a experiência visual mais organizada, responsiva e moderna.
+A proposta inicial surgiu como atividade prática de um curso Full Stack, mas ao longo das entregas o projeto evoluiu para uma aplicação completa com navegação entre páginas, gerenciamento de estado global, autenticação, validação de formulários e uma interface responsiva inspirada em plataformas reais de comércio eletrônico.
 
-Nesta etapa, a lógica do e-commerce foi mantida, incluindo o funcionamento do carrinho, a tipagem com TypeScript e a estrutura dos produtos. A principal evolução foi a refatoração da interface, substituindo elementos HTML comuns por componentes visuais mais robustos e estilizados.
+O objetivo principal foi aplicar conceitos modernos de desenvolvimento Frontend, componentização, Programação Orientada a Objetos, tipagem forte, gerenciamento de estado e experiência do usuário.
 
 ---
 
-## 🎯 Objetivos da Atividade
+## 🚀 Funcionalidades
 
-Implementar melhorias na interface do sistema utilizando:
+### 🏠 Home
 
-- PrimeVue
-- Tailwind CSS
-- Componentes reutilizáveis
+- Vitrine de produtos
 - Layout responsivo
-- Componentes visuais para produtos e carrinho
-- Manutenção da reatividade da aplicação
-- Preservação da tipagem com TypeScript
+- Cards de produtos utilizando PrimeVue
+- Navegação para detalhes do produto
 
 ---
 
-## 🚀 Funcionalidades e Melhorias Implementadas
+### 📦 Detalhes do Produto
 
-### 🧩 Integração com PrimeVue
-
-O projeto foi configurado para utilizar componentes do **PrimeVue**, permitindo uma interface mais profissional e padronizada.
-
-Componentes utilizados na aplicação:
-
-- `Card`
-- `Button`
-- `InputNumber`
-
-Esses componentes substituem elementos HTML comuns e tornam a interface mais elegante e consistente.
+- Exibição individual dos produtos
+- Informações detalhadas
+- Imagens do produto
+- Seleção de quantidade
+- Adição ao carrinho
 
 ---
 
-### 🎨 Estilização com Tailwind CSS
+### 🛒 Carrinho de Compras
 
-A estilização foi realizada utilizando classes utilitárias do **Tailwind CSS**, evitando CSS customizado manual.
+- Adição de produtos
+- Atualização de quantidades
+- Remoção de itens
+- Cálculo automático do valor total
+- Atualização reativa em tempo real
 
-Foram aplicadas classes para:
+---
 
-- Espaçamento
-- Grid responsivo
-- Alinhamento
-- Bordas
-- Sombras
-- Organização visual
-- Responsividade
+### 💳 Checkout
 
-Exemplo de layout responsivo utilizado:
+- Resumo da compra
+- Quantidade total de itens
+- Valor final do pedido
+- Proteção de rota para usuários não autenticados
 
-```html
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+---
+
+### 🔐 Sistema de Autenticação
+
+- Login
+- Cadastro de usuários
+- Logout
+- Persistência de autenticação
+- Controle de acesso por perfil
+
+---
+
+### 👤 Controle de Permissões
+
+Perfis suportados:
+
+- ADMIN
+- CUSTOMER
+
+Permissões são controladas através de Route Guards.
+
+---
+
+### 📋 Área Administrativa
+
+- Dashboard administrativo
+- Navegação independente da área do cliente
+- Estrutura preparada para gerenciamento de produtos
+- Estrutura preparada para relatórios
+
+---
+
+## 🎨 Interface
+
+A interface foi construída utilizando PrimeVue e Tailwind CSS.
+
+### Componentes Utilizados
+
+- Card
+- Button
+- InputText
+- Password
+- InputNumber
+- Menubar
+- DataTable
+- Toast
+- ConfirmDialog
+- Breadcrumb
+
+---
+
+## ⚡ Melhorias de Frontend Implementadas
+
+### Responsividade
+
+A aplicação adapta-se para:
+
+- Smartphones
+- Tablets
+- Notebooks
+- Monitores Desktop
+
+---
+
+### Componentização
+
+Separação da interface em componentes reutilizáveis:
+
+```text
+components/
+├── ProductCard.vue
+├── Navbar.vue
+├── Cart.vue
+├── ProductGallery.vue
+└── CheckoutSummary.vue
 ```
 
 ---
 
-### 🖼️ Refatoração do ProductCard.vue
+### Experiência do Usuário
 
-O componente `ProductCard.vue` foi refatorado para utilizar componentes do PrimeVue.
-
-Principais melhorias:
-
-- Uso do componente `Card`
-- Uso do componente `Button`
-- Melhor organização visual do produto
-- Layout mais limpo e reutilizável
-- Estilização com Tailwind CSS
-
-Essa alteração deixou a vitrine de produtos mais organizada e visualmente próxima de uma aplicação real de e-commerce.
+- Feedback visual com Toasts
+- Loading States
+- Navegação sem recarregamento de página
+- Validação instantânea de formulários
+- Interface limpa e intuitiva
 
 ---
 
-### 🏗️ Atualização do Layout Principal
-
-O arquivo `App.vue` foi ajustado para organizar melhor a vitrine de produtos e a área do carrinho.
-
-Melhorias aplicadas:
-
-- Grid responsivo para produtos
-- Separação visual entre vitrine e carrinho
-- Layout adaptável para diferentes tamanhos de tela
-- Melhor espaçamento entre os elementos
-
----
-
-### 🛒 Carrinho com Componentes PrimeVue
-
-A área do carrinho foi melhorada com componentes visuais do PrimeVue.
-
-Melhorias implementadas:
-
-- Exibição dos itens adicionados ao carrinho
-- Visualização da quantidade de cada item
-- Atualização de quantidade com `InputNumber`
-- Cálculo automático do total de itens
-- Cálculo automático do preço final
-
----
-
-### 🔢 Controle de Quantidade
-
-O componente `InputNumber` foi utilizado para alterar a quantidade de produtos no carrinho de forma mais prática.
-
-Com isso, o usuário pode incrementar ou reduzir a quantidade dos itens de maneira mais intuitiva, mantendo a reatividade da aplicação.
-
----
-
-### 🧮 Total de Itens e Preço Final
-
-A aplicação continua exibindo:
-
-- Total de itens no carrinho
-- Preço final da compra
-
-Esses valores são atualizados de forma reativa conforme os produtos são adicionados ou suas quantidades são alteradas.
-
----
-
-## 🔥 Desafio Extra
-
-Além da migração básica para PrimeVue e Tailwind, a atividade também propôs melhorias de experiência premium.
-
-Possíveis melhorias previstas:
-
-- Empty State para carrinho vazio
-- Confirmação antes de remover todos os itens
-- Implementação de tema claro/escuro
-- Uso de `ConfirmDialog`
-- Integração com classes `dark:` do Tailwind
-
----
-
-## 🏗️ Estrutura da Aplicação
-
-A aplicação segue uma estrutura baseada em componentes, mantendo a separação entre lógica, visualização e tipagem.
+## 🏗️ Arquitetura da Aplicação
 
 ```text
 src/
+├── assets/
 ├── components/
-│   └── ProductCard.vue
-│
+├── interfaces/
+├── layouts/
 ├── models/
-│   ├── Category.ts
-│   ├── Product.ts
-│   ├── User.ts
-│   └── Cart.ts
-│   └── CartItem.ts
-│
-│
+├── router/
+├── stores/
+├── views/
 ├── App.vue
-├── main.ts
-└── style.css
+└── main.ts
 ```
 
 ---
 
-## 📚 Conceitos Praticados
+## 🧠 Conceitos Aplicados
+
+### Frontend
+
+- Componentização
+- SPA (Single Page Application)
+- Responsividade
+- UX/UI
 
 ### Vue
 
-- Componentização
-- Props
-- Eventos personalizados
-- Reatividade
+- Vue 3
+- Composition API
 - Options API
+- Props
+- Emits
+- Computed
+- Watch
 
 ### TypeScript
 
 - Interfaces
-- Tipagem de objetos
-- Tipagem de componentes
-- Proteção de dados com tipos
+- Enums
+- Tipagem forte
+- Modelagem de entidades
 
-### PrimeVue
+### Gerenciamento de Estado
 
-- Configuração de plugin
-- Uso de componentes prontos
-- Componentes `Card`
-- Componentes `Button`
-- Componentes `InputNumber`
+- Pinia
+- Stores globais
+- Reatividade
 
-### Tailwind CSS
+### Validação
 
-- Classes utilitárias
-- Grid responsivo
-- Espaçamentos
-- Sombras
-- Bordas arredondadas
-- Layout adaptável
+- Vuelidate
+- Regras customizadas
+- Feedback visual
 
-### E-commerce
+### Navegação
 
-- Vitrine de produtos
-- Carrinho de compras
-- Controle de quantidade
-- Cálculo de totais
-- Atualização reativa da interface
-
----
-
-## 🔄 Evolução em Relação à Atividade 2
-
-Na Atividade 2, o foco estava na estrutura lógica do sistema, incluindo:
-
-- Models
-- Interfaces
-- Tipagem avançada
-- Carrinho
-- Regras de negócio
-- High-Order Functions
-
-Nesta Atividade 3, o projeto evoluiu visualmente com:
-
-- Integração do PrimeVue
-- Configuração do Tailwind CSS
-- Refatoração do `ProductCard.vue`
-- Melhoria do layout principal
-- Grid responsivo para produtos
-- Carrinho com componentes mais modernos
-- Melhor experiência de uso
-
----
-
-## ✅ Critérios Atendidos
-
-- Uso de PrimeVue na interface
-- Uso de pelo menos dois componentes PrimeVue
-- Estilização com Tailwind CSS
-- Layout responsivo
-- Lógica de carrinho preservada
-- Tipagem TypeScript mantida
-- Reatividade da aplicação mantida
-- Interface mais organizada e profissional
+- Vue Router
+- Rotas dinâmicas
+- Route Guards
+- Nested Routes
 
 ---
 
@@ -246,21 +206,64 @@ Nesta Atividade 3, o projeto evoluiu visualmente com:
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=vue,ts,js,tailwind,vite,git,github,vscode" />
+<img src="https://skillicons.dev/icons?i=vue,ts,tailwind,vite,nodejs,git,github,vscode" />
 
 </div>
 
-### Ferramentas
+### Principais Tecnologias
 
-- Vue
+- Vue 3
 - TypeScript
 - PrimeVue
 - Tailwind CSS
+- Pinia
+- Vue Router
+- Vuelidate
 - Vite
-- JavaScript
-- Git
-- GitHub
-- VS Code
+
+---
+
+## 📸 Funcionalidades Desenvolvidas Durante o Projeto
+
+✔️ Modelagem de Produtos
+
+✔️ Modelagem de Categorias
+
+✔️ Carrinho de Compras
+
+✔️ Controle de Usuários
+
+✔️ Controle de Permissões
+
+✔️ Login e Cadastro
+
+✔️ Validação de Formulários
+
+✔️ Navegação por Rotas
+
+✔️ Área Administrativa
+
+✔️ Componentização
+
+✔️ Layout Responsivo
+
+✔️ Interface Moderna
+
+---
+
+## 🎓 Objetivos de Aprendizagem
+
+Este projeto foi desenvolvido para consolidar conhecimentos em:
+
+- Desenvolvimento Frontend Moderno
+- Vue 3
+- TypeScript
+- Componentização
+- Gerenciamento de Estado
+- Validação de Formulários
+- Arquitetura de Aplicações
+- Experiência do Usuário
+- Desenvolvimento de Sistemas E-commerce
 
 ---
 
@@ -281,3 +284,9 @@ Nesta Atividade 3, o projeto evoluiu visualmente com:
 </a>
 
 </div>
+
+---
+
+## ⭐ Projeto Acadêmico
+
+Projeto desenvolvido durante a formação Full Stack com foco na construção de um sistema de E-commerce completo utilizando tecnologias modernas do ecossistema JavaScript e TypeScript.
