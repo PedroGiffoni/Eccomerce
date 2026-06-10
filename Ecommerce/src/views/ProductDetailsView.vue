@@ -215,7 +215,7 @@ export default defineComponent({
 
   mounted() {
     if (this.product) {
-      this.selectedImage = this.product.images[0];
+      this.selectedImage = this.product.images?.[0] || "";
     }
   },
 

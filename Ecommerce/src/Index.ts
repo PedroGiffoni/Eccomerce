@@ -1,17 +1,27 @@
-import { Category } from "./models/Category";
-import { Product } from "./models/Product";
-import { User, UserRole } from "./models/User";
+import type { Category } from "./models/Category";
+import type { Product } from "./models/Product";
+import type { User } from "./models/User";
+import { UserRole } from "./models/User";
 import { Cart } from "./models/Cart";
 
 const electronics: Category = {
   id: 1,
-  name: "Eletrônicos",
+  title: "Eletrônicos",
 };
 
 const notebook: Product = {
   id: 1,
   name: "Notebook",
   price: 3500,
+  image: "/products/notebook1.jpg",
+
+  images: [
+    "/products/notebook1.jpg",
+    "/products/notebook2.jpg",
+    "/products/notebook3.jpg",
+    "/products/notebook4.jpg",
+    "/products/notebook5.jpg",
+  ],
   category: electronics,
 };
 
@@ -19,6 +29,14 @@ const mouse: Product = {
   id: 2,
   name: "Mouse Gamer",
   price: 150,
+  image: "/products/mouse1.jpg",
+  images: [
+    "/products/mouse1.jpg",
+    "/products/mouse2.jpg",
+    "/products/mouse3.jpg",
+    "/products/mouse4.jpg",
+    "/products/mouse5.jpg",
+  ],
   category: electronics,
 };
 

@@ -1,13 +1,11 @@
-import { Product } from "./Product";
-import { CartItem } from "./CartItem";
+import type { Product } from "./Product";
+import type { CartItem } from "./CartItem";
 
 export class Cart {
   private items: CartItem[] = [];
 
   addItem(product: Product, quantity: number): void {
-    const productExists = this.items.some(
-      (item) => item.product.id === product.id,
-    );
+    const productExists = this.items.some((item) => item.product.id === product.id);
 
     if (productExists) {
       const item = this.items.find((item) => item.product.id === product.id);
@@ -28,10 +26,7 @@ export class Cart {
   }
 
   getFinalPrice(): number {
-    return this.items.reduce(
-      (total, item) => total + item.product.price * item.quantity,
-      0,
-    );
+    return this.items.reduce((total, item) => total + item.product.price * item.quantity, 0);
   }
 
   getItems(): CartItem[] {
