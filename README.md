@@ -1,5 +1,28 @@
 # 🛒 E-commerce Full Stack
 
+<div align="center">
+
+## 🌐 Acesse a Aplicação Online
+
+### 🚀 Demonstração do Frontend
+
+# 👉 https://eletrocommerce.vercel.app 👈
+
+[![Acessar Aplicação](https://img.shields.io/badge/🌐%20Acessar%20E-commerce%20Online-0A66C2?style=for-the-badge)](https://eletrocommerce.vercel.app)
+
+</div>
+
+---
+
+## 📸 Preview da Aplicação
+
+> A aplicação está disponível online através da Vercel e pode ser acessada pelo link acima para visualizar todas as funcionalidades implementadas no frontend, incluindo catálogo de produtos, autenticação, carrinho de compras, checkout, área administrativa e navegação responsiva.
+
+---
+
+## 📖 Sobre o Projeto
+
+Este projeto consiste no desenvolvimento completo de uma plataforma de E-commerce Full Stack construída ao longo de diversas atividades práticas de formação em desenvolvimento web.
 ## 📖 Sobre o Projeto
 
 Este projeto consiste no desenvolvimento completo de uma plataforma de E-commerce Full Stack construída ao longo de diversas atividades práticas de formação em desenvolvimento web.
