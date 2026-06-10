@@ -1,88 +1,168 @@
-# 🛒 E-commerce Eletrocommerce
+# 🛒 E-commerce Full Stack
 
 ## 📖 Sobre o Projeto
 
-Este projeto consiste no desenvolvimento de uma aplicação de E-commerce moderna utilizando Vue 3, TypeScript, PrimeVue e Tailwind CSS.
+Este projeto consiste no desenvolvimento completo de uma plataforma de E-commerce Full Stack construída ao longo de diversas atividades práticas de formação em desenvolvimento web.
 
-A proposta inicial surgiu como atividade prática de um curso Full Stack, mas ao longo das entregas o projeto evoluiu para uma aplicação completa com navegação entre páginas, gerenciamento de estado global, autenticação, validação de formulários e uma interface responsiva inspirada em plataformas reais de comércio eletrônico.
+Durante sua evolução, foram aplicados conceitos de:
 
-O objetivo principal foi aplicar conceitos modernos de desenvolvimento Frontend, componentização, Programação Orientada a Objetos, tipagem forte, gerenciamento de estado e experiência do usuário.
+- Programação Orientada a Objetos (POO)
+- TypeScript
+- Vue 3
+- PrimeVue
+- Tailwind CSS
+- Vue Router
+- Pinia
+- Vuelidate
+- Node.js
+- Express
+- Zod
+- Arquitetura REST
+- Middlewares
+- Controllers
+- Validação de Dados
 
----
-
-## 🚀 Funcionalidades
-
-### 🏠 Home
-
-- Vitrine de produtos
-- Layout responsivo
-- Cards de produtos utilizando PrimeVue
-- Navegação para detalhes do produto
-
----
-
-### 📦 Detalhes do Produto
-
-- Exibição individual dos produtos
-- Informações detalhadas
-- Imagens do produto
-- Seleção de quantidade
-- Adição ao carrinho
+O projeto evoluiu gradualmente desde a modelagem das entidades do domínio até a implementação de um backend estruturado, autenticação, gerenciamento de estado global, validações robustas e uma interface moderna e responsiva.
 
 ---
 
-### 🛒 Carrinho de Compras
+# 🚀 Principais Funcionalidades
+
+## 🏠 Catálogo de Produtos
+
+- Listagem de produtos
+- Organização por categorias
+- Visualização detalhada
+- Filtragem por categoria
+- Navegação dinâmica entre produtos
+
+---
+
+## 📦 Gerenciamento de Produtos
+
+- Cadastro de produtos
+- Atualização de informações
+- Exclusão de produtos
+- Associação entre produtos e categorias
+- Validação de dados
+
+---
+
+## 📂 Gerenciamento de Categorias
+
+- Cadastro de categorias
+- Atualização de categorias
+- Exclusão de categorias
+- Paginação de resultados
+- Validação de UUID
+
+---
+
+## 🛒 Carrinho de Compras
 
 - Adição de produtos
-- Atualização de quantidades
+- Atualização de quantidade
 - Remoção de itens
 - Cálculo automático do valor total
-- Atualização reativa em tempo real
+- Cálculo automático da quantidade total
 
 ---
 
-### 💳 Checkout
+## 💳 Checkout
 
-- Resumo da compra
-- Quantidade total de itens
-- Valor final do pedido
-- Proteção de rota para usuários não autenticados
+- Resumo do pedido
+- Validação de autenticação
+- Proteção de acesso via Route Guards
+- Simulação de finalização de compra
 
 ---
 
-### 🔐 Sistema de Autenticação
+## 🔐 Sistema de Autenticação
 
 - Login
 - Cadastro de usuários
 - Logout
-- Persistência de autenticação
-- Controle de acesso por perfil
+- Persistência de sessão
+- Controle de acesso
 
 ---
 
-### 👤 Controle de Permissões
+## 👤 Controle de Perfis
 
 Perfis suportados:
 
-- ADMIN
-- CUSTOMER
+```text
+ADMIN
+CUSTOMER
+```
 
-Permissões são controladas através de Route Guards.
+Permissões diferenciadas para:
+
+- Área administrativa
+- Área do cliente
+- Rotas protegidas
 
 ---
 
-### 📋 Área Administrativa
+## 📋 Dashboard Administrativo
 
-- Dashboard administrativo
-- Navegação independente da área do cliente
-- Estrutura preparada para gerenciamento de produtos
+- Área exclusiva para administradores
+- Gestão de produtos
+- Gestão de categorias
 - Estrutura preparada para relatórios
+- Navegação independente
 
 ---
 
-## 🎨 Interface
+# 🏗️ Arquitetura do Projeto
 
-A interface foi construída utilizando PrimeVue e Tailwind CSS.
+## Frontend
+
+```text
+Vue 3
+│
+├── Components
+├── Views
+├── Layouts
+├── Router
+├── Pinia Stores
+└── Vuelidate
+```
+
+---
+
+## Backend
+
+```text
+Express
+│
+├── Routers
+├── Controllers
+├── Middlewares
+├── Schemas (Zod)
+└── REST API
+```
+
+---
+
+# 🎨 Frontend
+
+## Tecnologias Utilizadas
+
+- Vue 3
+- TypeScript
+- PrimeVue
+- Tailwind CSS
+- Pinia
+- Vue Router
+- Vuelidate
+- Vite
+
+---
+
+## Interface Moderna
+
+A interface foi desenvolvida utilizando PrimeVue e Tailwind CSS.
 
 ### Componentes Utilizados
 
@@ -99,11 +179,9 @@ A interface foi construída utilizando PrimeVue e Tailwind CSS.
 
 ---
 
-## ⚡ Melhorias de Frontend Implementadas
+## Responsividade
 
-### Responsividade
-
-A aplicação adapta-se para:
+A aplicação adapta-se automaticamente para:
 
 - Smartphones
 - Tablets
@@ -112,9 +190,7 @@ A aplicação adapta-se para:
 
 ---
 
-### Componentização
-
-Separação da interface em componentes reutilizáveis:
+## Componentização
 
 ```text
 components/
@@ -122,49 +198,247 @@ components/
 ├── Navbar.vue
 ├── Cart.vue
 ├── ProductGallery.vue
-└── CheckoutSummary.vue
+├── CheckoutSummary.vue
+└── AuthForms.vue
 ```
 
 ---
 
-### Experiência do Usuário
+## Navegação
 
-- Feedback visual com Toasts
-- Loading States
-- Navegação sem recarregamento de página
-- Validação instantânea de formulários
-- Interface limpa e intuitiva
+Implementada utilizando Vue Router.
+
+### Recursos
+
+- Rotas Dinâmicas
+- Nested Routes
+- Route Guards
+- Layouts distintos
+- Navegação SPA
 
 ---
 
-## 🏗️ Arquitetura da Aplicação
+## Gerenciamento de Estado
+
+Implementado com Pinia.
+
+### Stores
+
+- Auth Store
+- Cart Store
+- Product Store
+
+---
+
+## Validação de Formulários
+
+Implementada com Vuelidate.
+
+### Validações
+
+- Campos obrigatórios
+- E-mail válido
+- Senha mínima
+- Confirmação de senha
+- Feedback visual instantâneo
+
+---
+
+# ⚙️ Backend
+
+## Tecnologias Utilizadas
+
+- Node.js
+- Express
+- TypeScript
+- Zod
+
+---
+
+## API REST
+
+A API foi desenvolvida seguindo os princípios REST.
+
+### Produtos
+
+```http
+GET     /products
+GET     /products/:id
+POST    /products
+DELETE  /products/:id
+```
+
+---
+
+### Categorias
+
+```http
+GET     /category
+GET     /category/:id
+POST    /category
+PUT     /category/:id
+DELETE  /category/:id
+```
+
+---
+
+### Pedidos
+
+```http
+POST    /orders
+PATCH   /orders/:id
+DELETE  /orders/:id
+```
+
+---
+
+## Query Strings
+
+Exemplo:
+
+```http
+GET /products?category=eletronicos
+```
+
+---
+
+## Params
+
+Exemplo:
+
+```http
+GET /products/1
+```
+
+---
+
+## Body
+
+Exemplo:
+
+```json
+{
+  "name": "Notebook Gamer",
+  "price": 5500,
+  "categoryId": "uuid"
+}
+```
+
+---
+
+# 🛡️ Validação com Zod
+
+O projeto utiliza Zod para validação de:
+
+### Query Strings
+
+```typescript
+req.query;
+```
+
+### Params
+
+```typescript
+req.params;
+```
+
+### Body
+
+```typescript
+req.body;
+```
+
+---
+
+## Validações Implementadas
+
+### Categoria
+
+```typescript
+name;
+```
+
+- Obrigatório
+- Mínimo de 3 caracteres
+
+---
+
+### Produto
+
+```typescript
+name;
+price;
+categoryId;
+```
+
+Validações:
+
+- Nome obrigatório
+- Nome mínimo de 3 caracteres
+- Preço positivo
+- UUID válido
+
+---
+
+# 🔥 Middlewares
+
+## Logger
+
+Registro automático das requisições.
+
+Exemplo:
 
 ```text
-src/
-├── assets/
-├── components/
-├── interfaces/
-├── layouts/
-├── models/
-├── router/
-├── stores/
-├── views/
-├── App.vue
-└── main.ts
+[2026-06-10] GET /products
 ```
 
 ---
 
-## 🧠 Conceitos Aplicados
+## Validation Middleware
 
-### Frontend
+Validação automática utilizando schemas do Zod.
+
+Benefícios:
+
+- Controllers mais limpos
+- Reutilização de código
+- Menos duplicação
+
+---
+
+# 🏛️ Arquitetura em Camadas
+
+```text
+Request
+   │
+   ▼
+Router
+   │
+   ▼
+Middleware
+   │
+   ▼
+Controller
+   │
+   ▼
+Response
+```
+
+---
+
+# 📚 Conceitos Aplicados
+
+## Frontend
 
 - Componentização
-- SPA (Single Page Application)
+- SPA
 - Responsividade
 - UX/UI
+- Reatividade
 
-### Vue
+---
+
+## Vue
 
 - Vue 3
 - Composition API
@@ -174,43 +448,86 @@ src/
 - Computed
 - Watch
 
-### TypeScript
+---
+
+## TypeScript
 
 - Interfaces
 - Enums
-- Tipagem forte
-- Modelagem de entidades
-
-### Gerenciamento de Estado
-
-- Pinia
-- Stores globais
-- Reatividade
-
-### Validação
-
-- Vuelidate
-- Regras customizadas
-- Feedback visual
-
-### Navegação
-
-- Vue Router
-- Rotas dinâmicas
-- Route Guards
-- Nested Routes
+- Tipagem Forte
+- Models
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Gerenciamento de Estado
+
+- Pinia
+- Stores Globais
+
+---
+
+## Validação
+
+- Vuelidate
+- Zod
+
+---
+
+## Backend
+
+- Express
+- REST API
+- Controllers
+- Middlewares
+- Routers
+
+---
+
+## Arquitetura
+
+- Separação de Responsabilidades
+- Controllers
+- Schemas
+- Middlewares
+- Organização em Camadas
+
+---
+
+# 📂 Estrutura do Projeto
+
+```text
+src/
+├── frontend/
+│   ├── assets/
+│   ├── components/
+│   ├── interfaces/
+│   ├── layouts/
+│   ├── models/
+│   ├── router/
+│   ├── stores/
+│   ├── views/
+│   └── App.vue
+│
+├── backend/
+│   ├── routers/
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── schemas/
+│   ├── app.ts
+│   └── server.ts
+```
+
+---
+
+# 🛠️ Tecnologias Utilizadas
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=vue,ts,tailwind,vite,nodejs,git,github,vscode" />
+<img src="https://skillicons.dev/icons?i=vue,ts,tailwind,nodejs,express,vite,git,github,vscode" />
 
 </div>
 
-### Principais Tecnologias
+### Frontend
 
 - Vue 3
 - TypeScript
@@ -221,53 +538,39 @@ src/
 - Vuelidate
 - Vite
 
----
+### Backend
 
-## 📸 Funcionalidades Desenvolvidas Durante o Projeto
+- Node.js
+- Express
+- TypeScript
+- Zod
 
-✔️ Modelagem de Produtos
+### Ferramentas
 
-✔️ Modelagem de Categorias
-
-✔️ Carrinho de Compras
-
-✔️ Controle de Usuários
-
-✔️ Controle de Permissões
-
-✔️ Login e Cadastro
-
-✔️ Validação de Formulários
-
-✔️ Navegação por Rotas
-
-✔️ Área Administrativa
-
-✔️ Componentização
-
-✔️ Layout Responsivo
-
-✔️ Interface Moderna
+- Git
+- GitHub
+- VS Code
 
 ---
 
-## 🎓 Objetivos de Aprendizagem
+# 🎓 Objetivos de Aprendizagem
 
 Este projeto foi desenvolvido para consolidar conhecimentos em:
 
 - Desenvolvimento Frontend Moderno
-- Vue 3
+- Desenvolvimento Backend com Node.js
+- APIs REST
+- Programação Orientada a Objetos
 - TypeScript
-- Componentização
 - Gerenciamento de Estado
-- Validação de Formulários
-- Arquitetura de Aplicações
-- Experiência do Usuário
-- Desenvolvimento de Sistemas E-commerce
+- Validação de Dados
+- Arquitetura de Software
+- Desenvolvimento Full Stack
+- Construção de Sistemas de E-commerce
 
 ---
 
-## 👨‍💻 Autor
+# 👨‍💻 Autor
 
 <div align="center">
 
@@ -287,6 +590,6 @@ Este projeto foi desenvolvido para consolidar conhecimentos em:
 
 ---
 
-## ⭐ Projeto Acadêmico
+# ⭐ Projeto Acadêmico Full Stack
 
-Projeto desenvolvido durante a formação Full Stack com foco na construção de um sistema de E-commerce completo utilizando tecnologias modernas do ecossistema JavaScript e TypeScript.
+Projeto desenvolvido durante a formação Full Stack com foco na construção de uma plataforma completa de E-commerce utilizando tecnologias modernas do ecossistema JavaScript e TypeScript, abrangendo Frontend, Backend, autenticação, gerenciamento de estado, validações e arquitetura REST.
