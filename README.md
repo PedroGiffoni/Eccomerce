@@ -20,9 +20,22 @@
 
 ---
 
-## 📖 Sobre o Projeto
+## 📸 Screenshots
 
-Este projeto consiste no desenvolvimento completo de uma plataforma de E-commerce Full Stack construída ao longo de diversas atividades práticas de formação em desenvolvimento web.
+### 🏠 Página Inicial
+
+![Home](./screenshots/home.png)
+
+### 📦 Detalhes do Produto
+
+![Produto](./screenshots/produto.png)
+
+### 🛒 Carrinho
+
+![Carrinho](./screenshots/carrinho.png)
+
+---
+
 ## 📖 Sobre o Projeto
 
 Este projeto consiste no desenvolvimento completo de uma plataforma de E-commerce Full Stack construída ao longo de diversas atividades práticas de formação em desenvolvimento web.
