@@ -1,4 +1,4 @@
-# 🛒 E-commerce Frontend
+# 🛒 E-commerce Eletrocommerce
 
 ## 📖 Sobre o Projeto
 
