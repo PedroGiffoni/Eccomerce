@@ -1,29 +1,44 @@
 import { Router } from "express";
 
-import {
-  getProducts,
-  createProduct,
-  deleteProduct,
-} from "../controllers/product.controller";
+import { ProductRepository } from "../repositories/ProductRepository";
+import { CategoryRepository } from "../repositories/CategoryRepository";
 
-import { validateData } from "../middlewares/validateData";
+import { ProductService } from "../services/ProductService";
+import { ProductController } from "../controllers/product.controller";
 
-import {
-  createProductSchema,
-  productParamsSchema,
-  productQuerySchema,
-} from "../schemas/product.schema";
+import { authMiddleware } from "../middlewares/authMiddleware";
+import { authorize } from "../middlewares/authorize";
 
 const router = Router();
 
-router.get("/", validateData(productQuerySchema, "query"), getProducts);
+const productRepository = new ProductRepository();
+const categoryRepository = new CategoryRepository();
 
-router.post("/", validateData(createProductSchema), createProduct);
+const productService = new ProductService(
+  productRepository,
+  categoryRepository,
+);
+
+const productController = new ProductController(productService);
+
+router.get("/", productController.getAll);
+
+router.get("/:id", productController.getById);
+
+router.post("/", authMiddleware, authorize("admin"), productController.create);
+
+router.put(
+  "/:id",
+  authMiddleware,
+  authorize("admin"),
+  productController.update,
+);
 
 router.delete(
   "/:id",
-  validateData(productParamsSchema, "params"),
-  deleteProduct,
+  authMiddleware,
+  authorize("admin"),
+  productController.delete,
 );
 
 export default router;

@@ -1,47 +1,36 @@
 import { Router } from "express";
 
-import {
-  getCategories,
-  getCategoryById,
-  createCategory,
-  updateCategory,
-  deleteCategory,
-} from "../controllers/category.controller";
+import { CategoryRepository } from "../repositories/CategoryRepository";
+import { CategoryService } from "../services/CategoryService";
+import { CategoryController } from "../controllers/category.controller";
 
-import { validateData } from "../middlewares/validateData";
-
-import {
-  categoryQueryPaginationSchema,
-  categoryParamsSchema,
-  createCategorySchema,
-} from "../schemas/category.schema";
+import { authMiddleware } from "../middlewares/authMiddleware";
+import { authorize } from "../middlewares/authorize";
 
 const router = Router();
 
-router.get(
-  "/",
-  validateData(categoryQueryPaginationSchema, "query"),
-  getCategories,
-);
+const categoryRepository = new CategoryRepository();
+const categoryService = new CategoryService(categoryRepository);
+const categoryController = new CategoryController(categoryService);
 
-router.get(
-  "/:id",
-  validateData(categoryParamsSchema, "params"),
-  getCategoryById,
-);
+router.get("/", categoryController.getAll);
 
-router.post("/", validateData(createCategorySchema), createCategory);
+router.get("/:id", categoryController.getById);
+
+router.post("/", authMiddleware, authorize("admin"), categoryController.create);
 
 router.put(
   "/:id",
-  validateData(categoryParamsSchema, "params"),
-  updateCategory,
+  authMiddleware,
+  authorize("admin"),
+  categoryController.update,
 );
 
 router.delete(
   "/:id",
-  validateData(categoryParamsSchema, "params"),
-  deleteCategory,
+  authMiddleware,
+  authorize("admin"),
+  categoryController.delete,
 );
 
 export default router;

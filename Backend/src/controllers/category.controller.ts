@@ -1,47 +1,88 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 
-import { categories } from "../data/categories";
+import { CategoryService } from "../services/CategoryService";
 
-export function getCategories(req: Request, res: Response) {
-  const { page, size } = req.query;
+import { CategoryListDto, CategoryResponseDto } from "../dtos/category.dto";
 
-  return res.status(200).json({
-    message: "Lista de categorias",
-    page,
-    size,
-    data: categories,
-  });
-}
+import {
+  categoryParamsSchema,
+  categoryQueryPaginationSchema,
+  createCategorySchema,
+  updateCategorySchema,
+} from "../schemas/category.schema";
 
-export function getCategoryById(req: Request, res: Response) {
-  const { id } = req.params;
+export class CategoryController {
+  constructor(private readonly categoryService: CategoryService) {}
 
-  const category = categories.find((category) => category.id === id);
+  getAll = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const query = categoryQueryPaginationSchema.parse(req.query);
 
-  return res.status(200).json({
-    data: category,
-  });
-}
+      const categories = await this.categoryService.getAll(
+        query.page,
+        query.size,
+      );
 
-export function createCategory(req: Request, res: Response) {
-  const category = req.body;
+      return res
+        .status(200)
+        .json(CategoryListDto.create(categories, query.page, query.size));
+    } catch (error) {
+      next(error);
+    }
+  };
 
-  return res.status(201).json({
-    message: "Categoria criada com sucesso.",
-    data: category,
-  });
-}
+  getById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const params = categoryParamsSchema.parse(req.params);
 
-export function updateCategory(req: Request, res: Response) {
-  const { id } = req.params;
+      const category = await this.categoryService.getById(params.id);
 
-  return res.status(200).json({
-    message: "Categoria atualizada com sucesso.",
-    id,
-    data: req.body,
-  });
-}
+      if (!category) {
+        return res.status(404).json({
+          message: "Categoria não encontrada.",
+        });
+      }
 
-export function deleteCategory(req: Request, res: Response) {
-  return res.status(204).send();
+      return res.status(200).json(CategoryResponseDto.create(category));
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  create = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const body = createCategorySchema.parse(req.body);
+
+      const category = await this.categoryService.create(body.name);
+
+      return res.status(201).json(CategoryResponseDto.create(category));
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  update = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const params = categoryParamsSchema.parse(req.params);
+      const body = updateCategorySchema.parse(req.body);
+
+      const category = await this.categoryService.update(params.id, body.name);
+
+      return res.status(200).json(CategoryResponseDto.create(category));
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  delete = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const params = categoryParamsSchema.parse(req.params);
+
+      await this.categoryService.delete(params.id);
+
+      return res.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  };
 }
